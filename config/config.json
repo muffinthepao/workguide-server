@@ -10,8 +10,10 @@
     "dialect": "postgres"
   },
   "production": {
+    "username": "lupfymhg",
+    "password": "jmylUZPlfqD3QzGQgP4XBKyAcNG2wGmT",
     "database": "workguide_production",
-    "host": "127.0.0.1",
+    "host": "postgres://lupfymhg:jmylUZPlfqD3QzGQgP4XBKyAcNG2wGmT@topsy.db.elephantsql.com/lupfymhg",
     "dialect": "postgres"
   }
 }
