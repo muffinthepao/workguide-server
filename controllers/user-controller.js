@@ -1,7 +1,6 @@
 // const bcrypt = require("bcrypt");
 
 // const userValidator = require("../joi-validators/users");
-const { devNull } = require("os");
 const db = require("../models");
 
 module.exports = {
