@@ -10,8 +10,10 @@
     "dialect": "postgres"
   },
   "production": {
+    "username": "lupfymhg",
+    "password": "jmylUZPlfqD3QzGQgP4XBKyAcNG2wGmT",
     "database": "lupfymhg",
-    "host": "postgres://lupfymhg:jmylUZPlfqD3QzGQgP4XBKyAcNG2wGmT@topsy.db.elephantsql.com/lupfymhg",
+    "host": "topsy.db.elephantsql.com",
     "dialect": "postgres"
   }
 }
