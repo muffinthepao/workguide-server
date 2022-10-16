@@ -8,6 +8,7 @@ const port = process.env.PORT || 8000;
 const db = require("./models");
 
 const userRouter = require('./router/user-routes')
+const questionRouter = require('./router/question-routes')
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(cors({ origin: "*" }));
 
 app.use("/api/v1/users/", userRouter);
+app.use("/api/v1/questions/", questionRouter);
 
 app.get("/", (req, res) => {
     res.send("Hello World! This is Project 4 server");
