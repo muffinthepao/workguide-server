@@ -1,7 +1,9 @@
 {
   "development": {
-    "database": "workguide_development",
-    "host": "127.0.0.1",
+    "username": "lupfymhg",
+    "password": "jmylUZPlfqD3QzGQgP4XBKyAcNG2wGmT",
+    "database": "lupfymhg",
+    "host": "topsy.db.elephantsql.com",
     "dialect": "postgres"
   },
   "test": {
