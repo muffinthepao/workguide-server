@@ -23,6 +23,9 @@ module.exports = (sequelize, DataTypes) => {
      type: DataTypes.INTEGER,
      allowNull: false
     }, 
+    category: {
+      type: DataTypes.STRING,
+    },
   }, {
     sequelize,
     modelName: 'question',
