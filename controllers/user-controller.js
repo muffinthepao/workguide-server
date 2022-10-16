@@ -6,13 +6,11 @@ const db = require("../models");
 
 module.exports = {
   register: async (req, res) => {
+
+    const newUser = {...req.body}
+
     try {
-      await db.user.create({
-        fullName: "Mervin Poh",
-        preferredName: "Mervin",
-        email: "mervin@mervin.com",
-        password: "123",
-      });
+      await db.user.create(newUser);
 
       res.status(201).json({ success: "user created" });
     } catch (error) {
