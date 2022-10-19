@@ -8,9 +8,11 @@ const imagekit = new ImageKit({
 
 const videoProcessingMethods = {
   uploadVideo: async (req, res, next) => {
-    if (req.files) {
-      console.log("1-have req.files")
-    }
+    console.log("1-have req.files")
+
+    return next()
+    // if (req.files) {
+    // }
   }
 }
 

@@ -5,6 +5,9 @@ const db = require("../models");
 
 module.exports = {
   create: async (req, res) => {
+    // console.log("create answer route")
+    // res.status(200).json({message: "holy"})
+    
     // joi validations for answer inputs
     let errorObject = {};
 
