@@ -5,39 +5,41 @@ const db = require("../models");
 
 module.exports = {
   create: async (req, res) => {
-    // console.log("create answer route")
-    // res.status(200).json({message: "holy"})
-    
-    // joi validations for answer inputs
-    let errorObject = {};
+    console.log("answer created")
+    console.log("from Controller - req.body", req.body)
+    console.log("from Controller - req.file", req.file)
+    res.status(200).json({message: "holy"})
 
-    const answerValidationResults = answerValidator.createAnswerValidator.validate(
-      req.body,
-      {
-        abortEarly: false,
-      }
-    );
+    // // joi validations for answer inputs
+    // let errorObject = {};
 
-    if (answerValidationResults.error) {
-      const validationError = answerValidationResults.error.details;
+    // const answerValidationResults = answerValidator.createAnswerValidator.validate(
+    //   req.body,
+    //   {
+    //     abortEarly: false,
+    //   }
+    // );
 
-      validationError.forEach((error) => {
-        errorObject[error.context.key] = error.message;
-      });
+    // if (answerValidationResults.error) {
+    //   const validationError = answerValidationResults.error.details;
 
-      return res.status(400).json(errorObject);
-    }
+    //   validationError.forEach((error) => {
+    //     errorObject[error.context.key] = error.message;
+    //   });
 
-    let validatedAnswer = {...answerValidationResults.value};
+    //   return res.status(400).json(errorObject);
+    // }
 
-    try {
-      await db.answer.create(validatedAnswer)
+    // let validatedAnswer = {...answerValidationResults.value};
 
-      res.status(201).json({ success: "answer created" });
-    } catch (error) {
-      console.log(error)
-      res.status(500).json({ error: "failed to create answer" });
-    }
+    // try {
+    //   await db.answer.create(validatedAnswer)
+
+    //   res.status(201).json({ success: "answer created" });
+    // } catch (error) {
+    //   console.log(error)
+    //   res.status(500).json({ error: "failed to create answer" });
+    // }
   },
 
   // showUser: async (req, res) => {
