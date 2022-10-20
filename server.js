@@ -11,7 +11,6 @@ const port = process.env.PORT || 8000;
 
 const userRouter = require('./router/user-routes')
 const questionRouter = require('./router/question-routes')
-// const answerRouter = require('./router/answer-routes')
 
 
 app.use(express.urlencoded({ extended: true }));

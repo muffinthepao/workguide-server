@@ -31,18 +31,18 @@ module.exports = {
 
     // let validatedAnswer = {...answerValidationResults.value};
 
-    try {
-      await db.answer.create({
-        answerURL: req.file,
-        userId: req.body.userId,
-        questionId: req.body.questionId
-      })
+    // try {
+    //   await db.answer.create({
+    //     answerURL: req.file,
+    //     userId: req.body.userId,
+    //     questionId: req.body.questionId
+    //   })
 
-      res.status(201).json({ success: "answer created" });
-    } catch (error) {
-      console.log(error)
-      res.status(500).json({ error: "failed to create answer" });
-    }
+    //   res.status(201).json({ success: "answer created" });
+    // } catch (error) {
+    //   console.log(error)
+    //   res.status(500).json({ error: "failed to create answer" });
+    // }
   },
 
   // showUser: async (req, res) => {
