@@ -1,14 +1,18 @@
 require("dotenv").config();
 
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
+
 const express = require("express");
 const cors = require("cors");
 
 const app = express();
 const port = process.env.PORT || 8000;
-const db = require("./models");
 
 const userRouter = require('./router/user-routes')
 const questionRouter = require('./router/question-routes')
+// const answerRouter = require('./router/answer-routes')
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
