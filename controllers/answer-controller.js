@@ -8,7 +8,6 @@ module.exports = {
     console.log("answer created")
     console.log("from Controller - req.body", req.body)
     console.log("from Controller - req.file", req.file)
-    res.status(200).json({message: "holy"})
 
     // // joi validations for answer inputs
     // let errorObject = {};
@@ -32,14 +31,18 @@ module.exports = {
 
     // let validatedAnswer = {...answerValidationResults.value};
 
-    // try {
-    //   await db.answer.create(validatedAnswer)
+    try {
+      await db.answer.create({
+        answerURL: req.file,
+        userId: req.body.userId,
+        questionId: req.body.questionId
+      })
 
-    //   res.status(201).json({ success: "answer created" });
-    // } catch (error) {
-    //   console.log(error)
-    //   res.status(500).json({ error: "failed to create answer" });
-    // }
+      res.status(201).json({ success: "answer created" });
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({ error: "failed to create answer" });
+    }
   },
 
   // showUser: async (req, res) => {
