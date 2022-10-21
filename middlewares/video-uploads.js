@@ -51,6 +51,13 @@ const videoProcessingMethods = {
 
     return next();
   },
+  uploadVideos: async (req, res, next) => {
+    console.log("1-have req.files")
+    console.log("from Mibbleware - req.body", req.body);
+    console.log("from Mibbleware - req.file", req.file);
+
+    
+  },
 };
 
 module.exports = videoProcessingMethods;
