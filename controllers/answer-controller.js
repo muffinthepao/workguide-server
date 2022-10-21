@@ -6,7 +6,7 @@ const db = require("../models");
 module.exports = {
   create: async (req, res) => {
     console.log("answer created")
-    console.log("from Controller - req.body", req.body)
+    console.log("from Controller - req.body", req.body.videoIds)
     console.log("from Controller - req.files", req.files)
 
     // // joi validations for answer inputs
@@ -31,13 +31,17 @@ module.exports = {
 
     // let validatedAnswer = {...answerValidationResults.value};
 
-    let allUrls = req.files.join(",")
+    let allUrls = JSON.stringify(req.files)
+    let allVideoIds = JSON.stringify(req.body.videoIds)
+
+    console.log("allVideoIds: ", allVideoIds)
 
     try {
       await db.answer.create({
         answerURL: allUrls,
         userId: req.body.userId,
-        questionId: req.body.questionId
+        questionId: req.body.questionId,
+        imageKitIds: allVideoIds
       })
 
       res.status(201).json({ success: "answer created" });
