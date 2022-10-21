@@ -15,9 +15,9 @@ router.post('/create', questionsController.create)
 
 
 // create answer
-router.post('/:questionId/answers', upload.single("file"), videoUploadsMiddleware.uploadVideo, answersController.create)
+// router.post('/:questionId/answers', upload.single("file"), videoUploadsMiddleware.uploadVideo, answersController.create)
 
-// router.post('/:questionId/answers', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideo, answersController.create)
+router.post('/:questionId/answers', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersController.create)
 
 
 module.exports = router;

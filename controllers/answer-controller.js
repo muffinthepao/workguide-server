@@ -7,7 +7,7 @@ module.exports = {
   create: async (req, res) => {
     console.log("answer created")
     console.log("from Controller - req.body", req.body)
-    console.log("from Controller - req.file", req.file)
+    console.log("from Controller - req.files", req.files)
 
     // // joi validations for answer inputs
     // let errorObject = {};
@@ -31,18 +31,20 @@ module.exports = {
 
     // let validatedAnswer = {...answerValidationResults.value};
 
-    // try {
-    //   await db.answer.create({
-    //     answerURL: req.file,
-    //     userId: req.body.userId,
-    //     questionId: req.body.questionId
-    //   })
+    let allUrls = req.files.join(",")
 
-    //   res.status(201).json({ success: "answer created" });
-    // } catch (error) {
-    //   console.log(error)
-    //   res.status(500).json({ error: "failed to create answer" });
-    // }
+    try {
+      await db.answer.create({
+        answerURL: allUrls,
+        userId: req.body.userId,
+        questionId: req.body.questionId
+      })
+
+      res.status(201).json({ success: "answer created" });
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({ error: "failed to create answer" });
+    }
   },
 
   // showUser: async (req, res) => {
