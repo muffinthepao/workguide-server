@@ -20,7 +20,7 @@ router.delete('/:questionId/delete', questionsController.deleteQuestion)
 
 // create answer
 // router.post('/:questionId/answers', upload.single("file"), videoUploadsMiddleware.uploadVideo, answersController.create)
-router.post('/:questionId/answers', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersController.create)
+router.post('/:questionId/answers/create', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersController.create)
 
 
 module.exports = router;
