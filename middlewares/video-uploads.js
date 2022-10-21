@@ -18,7 +18,7 @@ const videoProcessingMethods = {
   //         {
   //           file: req.file.buffer,
   //           fileName: "blob.mp4", //required
-  //           folder: "Workguide",
+  //           folder: "workguide",
   //         },
   //         function (err, response) {
   //           if (err) {

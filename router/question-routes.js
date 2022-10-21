@@ -18,9 +18,11 @@ router.delete('/:questionId/delete', questionsController.deleteQuestion)
 
 
 
-// create answer
+// create, list, show, update, delete answer
 // router.post('/:questionId/answers', upload.single("file"), videoUploadsMiddleware.uploadVideo, answersController.create)
-router.post('/:questionId/answers/create', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersController.create)
+router.post('/:questionId/answers/create', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersController.createAnswer)
+router.get('/:questionId/answers', answersController.listAnswers)
+
 
 
 module.exports = router;
