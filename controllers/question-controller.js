@@ -131,6 +131,23 @@ module.exports = {
     let questionId = req.params.questionId;
     let userId = req.body.userId;
 
+    let errorObject = {};
+
+    const questionValidationResults =
+      questionValidator.deleteQuestionValidator.validate(req.body, {
+        abortEarly: false,
+      });
+
+    if (questionValidationResults.error) {
+      const validationError = questionValidationResults.error.details;
+
+      validationError.forEach((error) => {
+        errorObject[error.context.key] = error.message;
+      });
+
+      return res.status(400).json(errorObject);
+    }
+
     try {
       const findQuestionAnswers = await db.answer.findAll({
         where: {
