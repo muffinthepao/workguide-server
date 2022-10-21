@@ -59,8 +59,8 @@ const videoProcessingMethods = {
       //multer midleware allows the req.file to come through
       console.log(" 1-have req.files");
       console.log("2-req.files--->");
-      const promises = req.files.map(async (file) => {
-        return await new Promise((resolve, reject) => {
+      const promises = req.files.map(async (file) => { //async waits for promise1
+        return await new Promise((resolve, reject) => { // this is promise1
           const response = imagekit.upload(
             {
               file: file.buffer,
@@ -83,10 +83,10 @@ const videoProcessingMethods = {
               }
             }
           );
-          return response
+          return response //returns response to promise1
         });
       });
-      const fileUrls = await Promise.all(promises);
+      const fileUrls = await Promise.all(promises); //returns a single promise of promises
       req.files = [...fileUrls]
       return next()
     } else {

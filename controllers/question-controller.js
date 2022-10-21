@@ -4,16 +4,14 @@ const questionValidator = require("../joi-validators/question");
 const db = require("../models");
 
 module.exports = {
-  create: async (req, res) => {
+  createQuestion: async (req, res) => {
     // joi validations for question inputs
     let errorObject = {};
 
-    const questionValidationResults = questionValidator.createQuestionValidator.validate(
-      req.body,
-      {
+    const questionValidationResults =
+      questionValidator.createQuestionValidator.validate(req.body, {
         abortEarly: false,
-      }
-    );
+      });
 
     if (questionValidationResults.error) {
       const validationError = questionValidationResults.error.details;
@@ -25,16 +23,112 @@ module.exports = {
       return res.status(400).json(errorObject);
     }
 
-    let validatedQuestion = {...questionValidationResults.value};
+    let validatedQuestion = { ...questionValidationResults.value };
 
     try {
-      await db.question.create(validatedQuestion)
+      await db.question.create(validatedQuestion);
 
       res.status(201).json({ success: "question created" });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       res.status(500).json({ error: "failed to create question" });
     }
+  },
+
+  listQuestions: async (req, res) => {
+    try {
+      let listQuestions = await db.question.findAll({
+        // raw: true, //with out without raw, the json sent over will still be in raw format
+        attributes: ["id", "question", "userId", "category"],
+      });
+
+      console.log(listQuestions);
+      res.status(200).json(listQuestions);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "failed to get questions" });
+    }
+  },
+
+  showQuestion: async (req, res) => {
+    let pk = req.params.questionId;
+
+    try {
+      let showQuestion = await db.question.findByPk(pk, {
+        // raw: true, //with out without raw, the json sent over will still be in raw format
+        attributes: ["id", "question", "userId", "category"],
+      });
+      // res.status(201).json({ success: "question created" });
+
+      console.log(showQuestion);
+      res.status(200).json(showQuestion);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "failed to get question" });
+    }
+  },
+
+  updateQuestion: async (req, res) => {
+    let questionId = req.params.questionId;
+    let userId = req.body.userId;
+
+    let errorObject = {};
+
+    const questionValidationResults =
+      questionValidator.createQuestionValidator.validate(req.body, {
+        abortEarly: false,
+      });
+
+    if (questionValidationResults.error) {
+      const validationError = questionValidationResults.error.details;
+
+      validationError.forEach((error) => {
+        errorObject[error.context.key] = error.message;
+      });
+
+      return res.status(400).json(errorObject);
+    }
+
+    // let validatedQuestion = { ...questionValidationResults.value };
+
+    try {
+
+      const findQuestionAnswers = await db.answer.findAll({
+        where: {
+          questionId: questionId
+        }
+      })
+
+      if (findQuestionAnswers.length >= 1) {
+        return res
+          .status(403)
+          .json({ error: "Cannot update Qns that already have answers" });
+      }
+
+     const qnsToUpdate =  await db.question.update(
+        { ...req.body },
+        {
+          where: {
+            id: questionId,
+            userId: userId,
+          },
+        }
+      );
+
+      if (qnsToUpdate[0] === 0) {
+        return res.status(404).json({ message: "Oops, question now found!" });
+      }
+
+      res.status(200).json({ message: "Question successfully updated!" });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "failed to update question" });
+    }
+
+  },
+
+  deleteQuestion: async (req, res) => {
+    res.send("deleted");
   },
 
   // showUser: async (req, res) => {
