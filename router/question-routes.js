@@ -9,9 +9,9 @@ const videoUploadsMiddleware = require ('../middlewares/video-uploads')
 
 const router = express.Router()
 
-// list, show, create question
-router.get('/', questionsController.listQuestions)
+// create, list, show, update, delete question
 router.post('/create', questionsController.createQuestion)
+router.get('/', questionsController.listQuestions)
 router.get('/:questionId', questionsController.showQuestion)
 router.put('/:questionId/update', questionsController.updateQuestion)
 router.delete('/:questionId/delete', questionsController.deleteQuestion)
