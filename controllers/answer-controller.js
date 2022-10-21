@@ -6,8 +6,8 @@ const db = require("../models");
 module.exports = {
   create: async (req, res) => {
     console.log("answer created")
-    console.log("from Controller - req.body", req.body)
-    console.log("from Controller - req.file", req.file)
+    console.log("from Controller - req.body", req.body.videoIds)
+    console.log("from Controller - req.files", req.files)
 
     // // joi validations for answer inputs
     // let errorObject = {};
@@ -31,18 +31,24 @@ module.exports = {
 
     // let validatedAnswer = {...answerValidationResults.value};
 
-    // try {
-    //   await db.answer.create({
-    //     answerURL: req.file,
-    //     userId: req.body.userId,
-    //     questionId: req.body.questionId
-    //   })
+    let allUrls = JSON.stringify(req.files)
+    let allVideoIds = JSON.stringify(req.body.videoIds)
 
-    //   res.status(201).json({ success: "answer created" });
-    // } catch (error) {
-    //   console.log(error)
-    //   res.status(500).json({ error: "failed to create answer" });
-    // }
+    console.log("allVideoIds: ", allVideoIds)
+
+    try {
+      await db.answer.create({
+        answerURL: allUrls,
+        userId: req.body.userId,
+        questionId: req.body.questionId,
+        imageKitIds: allVideoIds
+      })
+
+      res.status(201).json({ success: "answer created" });
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({ error: "failed to create answer" });
+    }
   },
 
   // showUser: async (req, res) => {
