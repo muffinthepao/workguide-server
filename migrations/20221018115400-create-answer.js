@@ -12,15 +12,29 @@ module.exports = {
       answerURL: {
         type: Sequelize.TEXT
       },
+      imageKitUrls:{ 
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      imageKitIds: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      status: {
+        type: Sequelize.ENUM("failed", "pending", "completed"),
+        defaultValue: "pending"
+      }, 
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       questionId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,

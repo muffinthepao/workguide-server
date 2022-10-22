@@ -1,0 +1,49 @@
+{
+  "timeline": {
+    "tracks": [
+      {
+        "clips": [
+          {
+            "asset": {
+              "type": "video",
+              "src": "https://shotstack-assets.s3.ap-southeast-2.amazonaws.com/footage/shore-overhead.mp4"
+            },
+            "start": 0,
+            "length": 19
+          }
+        ]
+      },
+      {
+        "clips": [
+          {
+            "asset": {
+              "type": "video",
+              "src": "https://shotstack-assets.s3.ap-southeast-2.amazonaws.com/footage/cliffs-sunset.mp4"
+            },
+            "start": 19,
+            "length": 8
+          }
+        ]
+      },
+      {
+        "clips": [
+          {
+            "asset": {
+              "type": "video",
+              "src": "https://shotstack-assets.s3.ap-southeast-2.amazonaws.com/footage/tree.mp4"
+            },
+            "start": 27,
+            "length": 16
+          }
+        ]
+      }
+    ]
+  },
+  "output": {
+    "format": "mp4",
+    "resolution": "sd"
+  }
+}
+
+https://api.shotstack.io/stage/render/cff75d60-c820-41cb-9d64-b48fef5cf9df
+{"success":true,"message":"OK","response":{"id":"cff75d60-c820-41cb-9d64-b48fef5cf9df","owner":"uk0zmjja7i","plan":"sandbox","status":"done","error":"","duration":43,"billable":43,"renderTime":20857.56,"url":"https://shotstack-api-stage-output.s3-ap-southeast-2.amazonaws.com/uk0zmjja7i/cff75d60-c820-41cb-9d64-b48fef5cf9df.mp4","poster":null,"thumbnail":null,"data":{"output":{"format":"mp4","resolution":"sd"},"timeline":{"tracks":[{"clips":[{"asset":{"type":"video","src":"https://shotstack-assets.s3.ap-southeast-2.amazonaws.com/footage/shore-overhead.mp4"},"start":0,"length":19}]},{"clips":[{"asset":{"type":"video","src":"https://shotstack-assets.s3.ap-southeast-2.amazonaws.com/footage/cliffs-sunset.mp4"},"start":19,"length":8}]},{"clips":[{"asset":{"type":"video","src":"https://shotstack-assets.s3.ap-southeast-2.amazonaws.com/footage/tree.mp4"},"start":27,"length":16}]}]}},"created":"2022-10-22T07:1➜  desktop 

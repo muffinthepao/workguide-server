@@ -4,7 +4,7 @@ const answerValidator = require("../joi-validators/answer");
 const db = require("../models");
 
 module.exports = {
-  createAnswer: async (req, res) => {
+  createAnswer: async (req, res, next) => {
     console.log("answer created");
     console.log("from Controller - req.body", req.body.videoIds);
     console.log("from Controller - req.files", req.files);
@@ -31,20 +31,23 @@ module.exports = {
 
     // let validatedAnswer = {...answerValidationResults.value};
 
-    let allUrls = JSON.stringify(req.files);
-    let allVideoIds = JSON.stringify(req.body.videoIds);
-
-    console.log("allVideoIds: ", allVideoIds);
+    let allImageKitVideoUrls = JSON.stringify(req.files);
+    let allImageKitVideoIds = JSON.stringify(req.body.videoIds);
 
     try {
-      await db.answer.create({
-        answerURL: allUrls,
+     const createdAnswer =  await db.answer.create({
+        imageKitUrls: allImageKitVideoUrls,
+        imageKitIds: allImageKitVideoIds,
         userId: req.body.userId,
         questionId: req.body.questionId,
-        imageKitIds: allVideoIds,
       });
 
-      res.status(201).json({ success: "answer created" });
+      req.body.answerId = createdAnswer.id
+      
+
+
+      return next()
+      // res.status(201).json({ success: "answer created" });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "failed to create answer" });
