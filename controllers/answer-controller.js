@@ -35,15 +35,12 @@ module.exports = {
     let allImageKitVideoIds = JSON.stringify(req.body.videoIds);
 
     try {
-     const createdAnswer =  await db.answer.create({
-        imageKitUrls: allImageKitVideoUrls,
-        imageKitIds: allImageKitVideoIds,
-        userId: req.body.userId,
-        questionId: req.body.questionId,
-      });
-
-      req.body.answerId = createdAnswer.id
-      
+    //  const createdAnswer =  await db.answer.create({
+    //     imageKitUrls: allImageKitVideoUrls,
+    //     imageKitIds: allImageKitVideoIds,
+    //     userId: req.body.userId,
+    //     questionId: req.body.questionId,
+    //   });
 
 
       return next()

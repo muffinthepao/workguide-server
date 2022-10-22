@@ -20,7 +20,8 @@ router.delete('/:questionId/delete', questionsController.deleteQuestion)
 
 // create, list, show, update, delete answer
 // router.post('/:questionId/answers', upload.single("file"), videoUploadsMiddleware.uploadVideo, answersController.create)
-router.post('/:questionId/answers/create', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersController.createAnswer, videoUploadsMiddleware.mergeVideos)
+// router.post('/:questionId/answers/create', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersController.createAnswer, videoUploadsMiddleware.mergeVideos)
+router.post('/:questionId/answers/create', videoUploadsMiddleware.uploadMultipleVideos, answersController.createAnswer, videoUploadsMiddleware.mergeVideos)
 router.get('/:questionId/answers', answersController.listAnswers)
 
 
