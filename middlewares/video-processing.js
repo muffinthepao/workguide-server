@@ -13,7 +13,7 @@ const videoProcessingMethods = {
     console.log("req.body: ", req.body);
     console.log("req.files: ", req.files);
 
-    const videoPartDurations = req.body.blobDurations;
+    const videoPartDurations = JSON.parse(req.body.blobDurations);
     const imagekitURLs = req.files;
     let shotstackArray = [];
 
@@ -119,10 +119,10 @@ const videoProcessingMethods = {
   },
   uploadMultipleVideos: async (req, res, next) => {
     console.log(" 1 -- reached upload videos middleware")
-    console.log("1 -- req.body", req.body);
-    console.log("1 -- req.body", req.body.blobDurations);
-    console.log("1 -- req.body", typeof req.body.blobDurations);
-    console.log("1 -- req.files", req.files);
+    // console.log("1 -- req.body", req.body);
+    // console.log("1 -- req.body", req.body.blobDurations);
+    // console.log("1 -- req.body", typeof req.body.blobDurations);
+    // console.log("1 -- req.files", req.files);
 
     if (req.files) {
     // multer midleware allows the req.file to come through
