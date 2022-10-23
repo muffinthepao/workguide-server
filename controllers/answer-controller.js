@@ -4,20 +4,20 @@ const answerValidator = require("../joi-validators/answer");
 const db = require("../models");
 
 module.exports = {
-  create: async (req, res) => {
-    console.log("answer created")
-    console.log("from Controller - req.body", req.body.videoIds)
-    console.log("from Controller - req.files", req.files)
+  createAnswer: async (req, res, next) => {
+    console.log(" 4 -- reach create Answer step");
 
-    // // joi validations for answer inputs
+    // console.log("answer created");
+    // console.log("4 -- req.body: ", req.body);
+    // console.log("4 --req.files: ", req.files);
+
+    // joi validations for answer inputs
     // let errorObject = {};
 
-    // const answerValidationResults = answerValidator.createAnswerValidator.validate(
-    //   req.body,
-    //   {
+    // const answerValidationResults =
+    //   answerValidator.createAnswerValidator.validate(req.body, {
     //     abortEarly: false,
-    //   }
-    // );
+    //   });
 
     // if (answerValidationResults.error) {
     //   const validationError = answerValidationResults.error.details;
@@ -25,29 +25,103 @@ module.exports = {
     //   validationError.forEach((error) => {
     //     errorObject[error.context.key] = error.message;
     //   });
-
+    //   console.log(errorObject)
     //   return res.status(400).json(errorObject);
     // }
 
-    // let validatedAnswer = {...answerValidationResults.value};
+    // let validatedAnswer = { ...answerValidationResults.value };
 
-    let allUrls = JSON.stringify(req.files)
-    let allVideoIds = JSON.stringify(req.body.videoIds)
-
-    console.log("allVideoIds: ", allVideoIds)
+    let allImageKitVideoUrls = JSON.stringify(req.files);
+    let allImageKitVideoIds = JSON.stringify(req.body.imageKitIds);
 
     try {
-      await db.answer.create({
-        answerURL: allUrls,
+      const createdAnswer = await db.answer.create({
+        imageKitUrls: allImageKitVideoUrls,
+        imageKitIds: allImageKitVideoIds,
         userId: req.body.userId,
         questionId: req.body.questionId,
-        imageKitIds: allVideoIds
-      })
+      });
 
-      res.status(201).json({ success: "answer created" });
+      console.log("createdAnswer: ", createdAnswer)
+
+      console.log(" 5 -- record created in db");
+      req.body.answerId = createdAnswer.id;
+      console.log(" 6 -- db.answer.id appended to req.body")
+
+      return next();
+      // res.status(201).json({ success: "answer created" });
     } catch (error) {
-      console.log(error)
+      console.log(error);
       res.status(500).json({ error: "failed to create answer" });
+    }
+  },
+  insertShotstackIdIntoDB: async (req, res, next) => {
+    console.log(" 9 -- start shotstackId insertion")
+    const shotstackId = req.body.shotstackId;
+    const answerId = req.body.answerId;
+
+    try {
+      const answerUpdated = await db.answer.update(
+        { shotstackId },
+        {
+          where: {
+            id: answerId,
+          },
+        }
+      );
+      console.log("answerUpdated", answerUpdated)
+      console.log(" 10 -- successful shotstackId insertion")
+      return next ()
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "unable to update shotstackId" });
+    }
+  },
+  insertShotstackUrlIntoDB: async (req, res, next) => {
+    console.log(" 11 -- start shotstackUrl insertion")
+    const shotstackId = req.body.shotstackId;
+    const shotstackUrl = req.body.answerId;
+
+    try {
+      await db.answer.update(
+        { shotstackUrl },
+        {
+          where: {
+            shotstackId,
+          },
+        }
+      );
+
+      console.log(" 11 -- successful shotstackUrl insertion")
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "unable to update shotstackId" });
+    }
+  },
+  listAnswers: async (req, res) => {
+    const questionId = req.params.questionId;
+    let answersArray = [];
+    try {
+      let answersToQuestion = await db.answer.findAll({
+        where: {
+          questionId,
+        },
+        attributes: ["id", "answerURL", "userId", "questionId"],
+      });
+
+      let FormatAnswersToQuestion = answersToQuestion.forEach((answer) => {
+        answersArray.push(JSON.parse(answer.answerURL));
+      });
+
+      answersArray.forEach(
+        (answer, index) => (answersToQuestion[index].answerURL = answer)
+      );
+
+      console.log("answersToQuestion", answersToQuestion);
+      res.status(200).json(answersToQuestion);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "failed to get answers" });
     }
   },
 

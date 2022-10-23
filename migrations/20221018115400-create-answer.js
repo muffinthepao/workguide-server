@@ -9,18 +9,40 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      answerURL: {
-        type: Sequelize.TEXT
+      shotstackUrl: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+        defaultValue: "pending"
       },
+      shotstackId: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+        defaultValue: "pending"
+      },
+      imageKitUrls:{ 
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      imageKitIds: {
+        type: Sequelize.TEXT,
+        allowNull: false
+      },
+      status: {
+        type: Sequelize.ENUM("failed", "pending", "completed"),
+        defaultValue: "pending",
+        allowNull: false
+      }, 
       userId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       questionId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,

@@ -5,7 +5,7 @@ const upload = multer()
 
 const questionsController = require('../controllers/question-controller')
 const answersController = require('../controllers/answer-controller')
-const videoUploadsMiddleware = require ('../middlewares/video-uploads')
+const videoUploadsMiddleware = require ('../middlewares/video-processing')
 
 const router = express.Router()
 
@@ -18,9 +18,20 @@ router.delete('/:questionId/delete', questionsController.deleteQuestion)
 
 
 
-// create answer
+// create, list, show, update, delete answer
 // router.post('/:questionId/answers', upload.single("file"), videoUploadsMiddleware.uploadVideo, answersController.create)
-router.post('/:questionId/answers/create', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersController.create)
+router.post('/:questionId/answers/create', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersController.createAnswer, videoUploadsMiddleware.mergeVideos, answersController.insertShotstackIdIntoDB)
+// router.post('/:questionId/answers/create', videoUploadsMiddleware.uploadMultipleVideos, answersController.createAnswer, videoUploadsMiddleware.mergeVideos, answersController.insertShotstackIdIntoDB)
+router.get('/:questionId/answers', answersController.listAnswers)
+router.post('/shortstack-callback', answersController.insertShotstackUrlIntoDB)
 
+
+// multer
+// imagekit
+// create record in db status is pending
+// shotstack + "callback". normally there is a callback url but currently dont have
+// update record in db
+// set interval is perpetrual until i clear it after rendering is complete
+// google alternatives to set interval
 
 module.exports = router;

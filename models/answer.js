@@ -15,13 +15,40 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   answer.init({
-    answerURL: DataTypes.TEXT,
-    userId: DataTypes.INTEGER,
-    questionId: DataTypes.INTEGER,
-    imageKitIds: DataTypes.TEXT
+    shotstackUrl: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: "pending"
+    },
+    shotstackId: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: "pending"
+    },
+    imageKitUrls:{ 
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    imageKitIds: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    status: {
+      type: DataTypes.ENUM("failed", "pending", "completed"),
+      defaultValue: "pending"
+    }, 
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    questionId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
   }, {
     sequelize,
     modelName: 'answer',
   });
   return answer;
 };
+
