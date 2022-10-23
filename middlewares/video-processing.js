@@ -206,7 +206,6 @@ const videoProcessingMethods = {
       imageKitUrls.push(file.url);
     });
     req.body.imageKitIds = imageKitIds;
-    req.body.blobDurations = [4, 2, 3, 2];
     // console.log("req.body", req.body)
     // console.log("videoIds: ", videoIds)
     // console.log("videoUrls: ", videoUrls)
