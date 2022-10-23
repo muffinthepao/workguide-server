@@ -121,6 +121,7 @@ const videoProcessingMethods = {
     console.log(" 1 -- reached upload videos middleware")
     console.log("1 -- req.body", req.body);
     console.log("1 -- req.body", req.body.blobDurations);
+    console.log("1 -- req.body", typeof req.body.blobDurations);
     console.log("1 -- req.files", req.files);
 
     if (req.files) {
