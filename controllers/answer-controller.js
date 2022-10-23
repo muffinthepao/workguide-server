@@ -57,8 +57,8 @@ module.exports = {
   },
   insertShotstackIdIntoDB: async (req, res, next) => {
     console.log(" 9 -- start shotstackId insertion")
-    const shotstackId = req.body.url;
-    const answerId = req.body.id;
+    const shotstackId = req.body.shotstackId;
+    const answerId = req.body.answerId;
 
     try {
       const answerUpdated = await db.answer.update(
@@ -80,8 +80,8 @@ module.exports = {
   insertShotstackUrlIntoDB: async (req, res) => {
     console.log(" 11 -- start shotstackUrl insertion")
     console.log("11 -- req.body: ,", req.body)
-    const shotstackId = req.body.shotstackId;
-    const shotstackUrl = req.body.answerId;
+    const shotstackId = req.body.id;
+    const shotstackUrl = req.body.url;
 
     try {
       await db.answer.update(
