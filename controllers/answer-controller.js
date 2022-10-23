@@ -79,6 +79,7 @@ module.exports = {
   },
   insertShotstackUrlIntoDB: async (req, res, next) => {
     console.log(" 11 -- start shotstackUrl insertion")
+    console.log("11 -- req.body: ,", req.body)
     const shotstackId = req.body.shotstackId;
     const shotstackUrl = req.body.answerId;
 
@@ -92,7 +93,7 @@ module.exports = {
         }
       );
 
-      console.log(" 11 -- successful shotstackUrl insertion")
+      console.log(" 12 -- successful shotstackUrl insertion")
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "unable to update shotstackId" });
