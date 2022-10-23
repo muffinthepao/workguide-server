@@ -33,6 +33,7 @@ const videoProcessingMethods = {
       });
 
       startingTime += videoPartDurations[i];
+      console.log("startingTime: ", startingTime)
     }
 
     try {
