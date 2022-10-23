@@ -5,19 +5,19 @@ const db = require("../models");
 
 module.exports = {
   createAnswer: async (req, res, next) => {
-    console.log("answer created");
-    console.log("from Controller - req.body", req.body.videoIds);
-    console.log("from Controller - req.files", req.files);
+    console.log(" 4 -- reach create Answer step");
 
-    // // joi validations for answer inputs
+    // console.log("answer created");
+    // console.log("4 -- req.body: ", req.body);
+    // console.log("4 --req.files: ", req.files);
+
+    // joi validations for answer inputs
     // let errorObject = {};
 
-    // const answerValidationResults = answerValidator.createAnswerValidator.validate(
-    //   req.body,
-    //   {
+    // const answerValidationResults =
+    //   answerValidator.createAnswerValidator.validate(req.body, {
     //     abortEarly: false,
-    //   }
-    // );
+    //   });
 
     // if (answerValidationResults.error) {
     //   const validationError = answerValidationResults.error.details;
@@ -25,32 +25,79 @@ module.exports = {
     //   validationError.forEach((error) => {
     //     errorObject[error.context.key] = error.message;
     //   });
-
+    //   console.log(errorObject)
     //   return res.status(400).json(errorObject);
     // }
 
-    // let validatedAnswer = {...answerValidationResults.value};
+    // let validatedAnswer = { ...answerValidationResults.value };
 
     let allImageKitVideoUrls = JSON.stringify(req.files);
-    let allImageKitVideoIds = JSON.stringify(req.body.videoIds);
+    let allImageKitVideoIds = JSON.stringify(req.body.imageKitIds);
 
     try {
-    //  const createdAnswer =  await db.answer.create({
-    //     imageKitUrls: allImageKitVideoUrls,
-    //     imageKitIds: allImageKitVideoIds,
-    //     userId: req.body.userId,
-    //     questionId: req.body.questionId,
-    //   });
+      const createdAnswer = await db.answer.create({
+        imageKitUrls: allImageKitVideoUrls,
+        imageKitIds: allImageKitVideoIds,
+        userId: req.body.userId,
+        questionId: req.body.questionId,
+      });
 
+      console.log("createdAnswer: ", createdAnswer)
 
-      return next()
+      console.log(" 5 -- record created in db");
+      req.body.answerId = createdAnswer.id;
+      console.log(" 6 -- db.answer.id appended to req.body")
+
+      return next();
       // res.status(201).json({ success: "answer created" });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "failed to create answer" });
     }
   },
+  insertShotstackIdIntoDB: async (req, res, next) => {
+    console.log(" 9 -- start shotstackId insertion")
+    const shotstackId = req.body.shotstackId;
+    const answerId = req.body.answerId;
 
+    try {
+      const answerUpdated = await db.answer.update(
+        { shotstackId },
+        {
+          where: {
+            id: answerId,
+          },
+        }
+      );
+      console.log("answerUpdated", answerUpdated)
+      console.log(" 10 -- successful shotstackId insertion")
+      return next ()
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "unable to update shotstackId" });
+    }
+  },
+  insertShotstackUrlIntoDB: async (req, res, next) => {
+    console.log(" 11 -- start shotstackUrl insertion")
+    const shotstackId = req.body.shotstackId;
+    const shotstackUrl = req.body.answerId;
+
+    try {
+      await db.answer.update(
+        { shotstackUrl },
+        {
+          where: {
+            shotstackId,
+          },
+        }
+      );
+
+      console.log(" 11 -- successful shotstackUrl insertion")
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "unable to update shotstackId" });
+    }
+  },
   listAnswers: async (req, res) => {
     const questionId = req.params.questionId;
     let answersArray = [];
@@ -66,9 +113,11 @@ module.exports = {
         answersArray.push(JSON.parse(answer.answerURL));
       });
 
-      answersArray.forEach ((answer, index) => answersToQuestion[index].answerURL = answer )
+      answersArray.forEach(
+        (answer, index) => (answersToQuestion[index].answerURL = answer)
+      );
 
-      console.log("answersToQuestion", answersToQuestion)
+      console.log("answersToQuestion", answersToQuestion);
       res.status(200).json(answersToQuestion);
     } catch (error) {
       console.log(error);

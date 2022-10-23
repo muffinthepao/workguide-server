@@ -15,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   answer.init({
-    answerURL: {
+    shotstackUrl: {
       type: DataTypes.TEXT,
       allowNull: false,
       defaultValue: "pending"
     },
-    answerId: {
+    shotstackId: {
       type: DataTypes.TEXT,
       allowNull: false,
       defaultValue: "pending"

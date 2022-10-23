@@ -9,12 +9,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      answerURL: {
+      shotstackUrl: {
         type: Sequelize.TEXT,
         allowNull: false,
         defaultValue: "pending"
       },
-      answerId: {
+      shotstackId: {
         type: Sequelize.TEXT,
         allowNull: false,
         defaultValue: "pending"
