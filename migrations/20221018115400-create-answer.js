@@ -10,7 +10,14 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       answerURL: {
-        type: Sequelize.TEXT
+        type: Sequelize.TEXT,
+        allowNull: false,
+        defaultValue: "pending"
+      },
+      answerId: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+        defaultValue: "pending"
       },
       imageKitUrls:{ 
         type: Sequelize.TEXT,
@@ -22,7 +29,8 @@ module.exports = {
       },
       status: {
         type: Sequelize.ENUM("failed", "pending", "completed"),
-        defaultValue: "pending"
+        defaultValue: "pending",
+        allowNull: false
       }, 
       userId: {
         type: Sequelize.INTEGER,

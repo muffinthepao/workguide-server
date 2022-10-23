@@ -16,7 +16,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   answer.init({
     answerURL: {
-      type: DataTypes.TEXT
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: "pending"
+    },
+    answerId: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: "pending"
     },
     imageKitUrls:{ 
       type: DataTypes.TEXT,
