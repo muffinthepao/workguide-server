@@ -57,8 +57,8 @@ module.exports = {
   },
   insertShotstackIdIntoDB: async (req, res, next) => {
     console.log(" 9 -- start shotstackId insertion")
-    const shotstackId = req.body.shotstackId;
-    const answerId = req.body.answerId;
+    const shotstackId = req.body.url;
+    const answerId = req.body.id;
 
     try {
       const answerUpdated = await db.answer.update(
