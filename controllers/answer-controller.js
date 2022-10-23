@@ -77,7 +77,7 @@ module.exports = {
       res.status(500).json({ message: "unable to update shotstackId" });
     }
   },
-  insertShotstackUrlIntoDB: async (req, res, next) => {
+  insertShotstackUrlIntoDB: async (req, res) => {
     console.log(" 11 -- start shotstackUrl insertion")
     console.log("11 -- req.body: ,", req.body)
     const shotstackId = req.body.shotstackId;
@@ -85,7 +85,7 @@ module.exports = {
 
     try {
       await db.answer.update(
-        { shotstackUrl },
+        { shotstackUrl: shotstackUrl},
         {
           where: {
             shotstackId,
@@ -94,6 +94,7 @@ module.exports = {
       );
 
       console.log(" 12 -- successful shotstackUrl insertion")
+      res.status(201).json({message: "video answer created"})
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "unable to update shotstackId" });
