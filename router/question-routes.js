@@ -11,6 +11,8 @@ const videoUploadsMiddleware = require ('../middlewares/video-processing')
 
 const router = express.Router()
 
+
+// **** QUESTION ROUTES **** //
 // create, list, show, update, delete question
 router.post('/create', questionsController.createQuestion)
 router.get('/', questionsController.listQuestions)

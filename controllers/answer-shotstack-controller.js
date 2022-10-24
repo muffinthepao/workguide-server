@@ -1,6 +1,6 @@
 // const bcrypt = require("bcrypt");
 
-const answerValidator = require("../joi-validators/answer");
+const answerValidator = require("../validators/joi-validators/answer");
 const db = require("../models");
 
 module.exports = {
@@ -30,16 +30,42 @@ module.exports = {
     // }
 
     // let validatedAnswer = { ...answerValidationResults.value };
+  
+    const questionId = req.params.questionId
 
     let allImageKitVideoUrls = JSON.stringify(req.files);
     let allImageKitVideoIds = JSON.stringify(req.body.imageKitIds);
 
     try {
+      //check if question exists
+      const findQuestion = await db.question.findByPk(questionId)
+
+      if (!findQuestion) {
+        return res
+          .status(404)
+          .json({ error: "question not found!" });
+      }
+
+
+      // check if user has answered question before
+      const findQuestionAnswers = await db.answer.findAll({
+        where: {
+          questionId: questionId
+        }
+      })
+
+      if (findQuestionAnswers.length >= 1) {
+        return res
+          .status(403)
+          .json({ error: "user can only have 1 answer per question" });
+      }
+
+
       const createdAnswer = await db.answer.create({
         imageKitUrls: allImageKitVideoUrls,
         imageKitIds: allImageKitVideoIds,
         userId: req.body.userId,
-        questionId: req.body.questionId,
+        questionId: questionId,
       });
 
       console.log("createdAnswer: ", createdAnswer);

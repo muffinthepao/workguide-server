@@ -1,5 +1,5 @@
 
-const answerValidator = require("../joi-validators/answer");
+const answerValidator = require("../validators/joi-validators/answer");
 const db = require("../models");
 
 module.exports = {
