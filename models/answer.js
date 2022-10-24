@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }, 
     answerMethod: {
-      type: Sequelize.ENUM("shotstack", "url"),
+      type: DataTypes.ENUM("shotstack", "url"),
       defaultValue: "shotstack",
       allowNull: false
     },

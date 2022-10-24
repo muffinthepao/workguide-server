@@ -1,19 +1,11 @@
 const axios = require("axios");
 const ImageKit = require("imagekit");
-const Shotstack = require("shotstack-sdk");
 
 const imagekit = new ImageKit({
   urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
   publicKey: process.env.IMAGEKIT_PUBLICKEY,
   privateKey: process.env.IMAGEKIT_PRIVATEKEY,
 });
-
-const defaultClient = Shotstack.ApiClient.instance;
-defaultClient.basePath = "https://api.shotstack.io/stage";
-
-const DeveloperKey =
-  defaultClient.authentications[process.env.SHOTSTACK_KEY_ID];
-DeveloperKey.apiKey = process.env.SHOTSTACK_API_KEY;
 
 const videoProcessingMethods = {
   mergeVideos: async (req, res, next) => {

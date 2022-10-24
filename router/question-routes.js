@@ -29,8 +29,8 @@ router.post('/:questionId/answers/url-interstion')
 
 // router.post('/:questionId/answers/create', videoUploadsMiddleware.uploadMultipleVideos, answersController.createAnswer, videoUploadsMiddleware.mergeVideos, answersController.insertShotstackIdIntoDB)
 router.get('/:questionId/answers', answersController.listAnswers)
-router.get('/:questionId/answers/:answerId', answersController.showAnswer)
-router.delete('/:questionId/answers/delete')
+// router.get('/:questionId/answers/:answerId', answersController.showAnswer)
+// router.delete('/:questionId/answers/delete')
 router.post('/shortstack-callback', answersController.insertShotstackUrlIntoDB)
 
 
