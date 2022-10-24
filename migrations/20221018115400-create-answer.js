@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      shotstackUrl: {
+     answerUrl: {
         type: Sequelize.TEXT,
         allowNull: false,
         defaultValue: "pending"
@@ -28,10 +28,15 @@ module.exports = {
         allowNull: false
       },
       status: {
-        type: Sequelize.ENUM("failed", "pending", "completed"),
+        type: Sequelize.ENUM("failed", "pending", "completed", "n/a"),
         defaultValue: "pending",
         allowNull: false
       }, 
+      answerMethod: {
+        type: Sequelize.ENUM("shotstack", "url"),
+        defaultValue: "shotstack",
+        allowNull: false
+      },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false

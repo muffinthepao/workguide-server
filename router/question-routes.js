@@ -20,9 +20,17 @@ router.delete('/:questionId/delete', questionsController.deleteQuestion)
 
 // create, list, show, update, delete answer
 // router.post('/:questionId/answers', upload.single("file"), videoUploadsMiddleware.uploadVideo, answersController.create)
-router.post('/:questionId/answers/create', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersController.createAnswer, videoUploadsMiddleware.mergeVideos, answersController.insertShotstackIdIntoDB)
+
+// create using videobooth or multi file upload
+router.post('/:questionId/answers/process-multi', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersController.createAnswer, videoUploadsMiddleware.mergeVideos, answersController.insertShotstackIdIntoDB)
+
+//create using URL
+router.post('/:questionId/answers/url-interstion')
+
 // router.post('/:questionId/answers/create', videoUploadsMiddleware.uploadMultipleVideos, answersController.createAnswer, videoUploadsMiddleware.mergeVideos, answersController.insertShotstackIdIntoDB)
 router.get('/:questionId/answers', answersController.listAnswers)
+// router.get('/:questionId/answers/:answerId', answersController.showAnswer)
+// router.delete('/:questionId/answers/delete')
 router.post('/shortstack-callback', answersController.insertShotstackUrlIntoDB)
 
 

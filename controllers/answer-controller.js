@@ -78,14 +78,14 @@ module.exports = {
     }
   },
   insertShotstackUrlIntoDB: async (req, res) => {
-    console.log(" 11 -- start shotstackUrl insertion")
+    console.log(" 11 -- start answerUrl insertion")
     console.log("11 -- req.body: ,", req.body)
     const shotstackId = req.body.id;
     const shotstackUrl = req.body.url;
 
     try {
       await db.answer.update(
-        { shotstackUrl: shotstackUrl},
+        { answerUrl: shotstackUrl},
         {
           where: {
             shotstackId,

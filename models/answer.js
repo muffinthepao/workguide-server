@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   answer.init({
-    shotstackUrl: {
+    ansnwerUrl: {
       type: DataTypes.TEXT,
       allowNull: false,
       defaultValue: "pending"
@@ -35,8 +35,14 @@ module.exports = (sequelize, DataTypes) => {
     },
     status: {
       type: DataTypes.ENUM("failed", "pending", "completed"),
-      defaultValue: "pending"
+      defaultValue: "pending",
+      allowNull: false
     }, 
+    answerMethod: {
+      type: DataTypes.ENUM("shotstack", "url"),
+      defaultValue: "shotstack",
+      allowNull: false
+    },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false
