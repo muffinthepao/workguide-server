@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   answer.init({
-    ansnwerUrl: {
+    answerUrl: {
       type: DataTypes.TEXT,
       allowNull: false,
       defaultValue: "pending"
