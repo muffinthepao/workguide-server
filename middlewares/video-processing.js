@@ -50,13 +50,6 @@ const videoProcessingMethods = {
       console.log("startingTime: ", startingTime);
     }
 
-    //create clips array
-    
-
-    //add into track
-    const track = new Shotstack.Track();
-    track.setClips(clips);
-
     try {
       const dataToSend = await axios.post(
         process.env.SHOTSTACK_RENDER_URL,
