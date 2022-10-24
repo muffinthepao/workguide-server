@@ -4,7 +4,7 @@ const answerValidator = require("../joi-validators/answer");
 const db = require("../models");
 
 module.exports = {
-  createShotStackAnswer: async (req, res, next) => {
+  createShotstackAnswer: async (req, res, next) => {
     console.log(" 4 -- reach create Answer step");
 
     // console.log("answer created");
@@ -103,4 +103,7 @@ module.exports = {
       res.status(500).json({ message: "unable to update shotstackId" });
     }
   },
+  deleteShotstackAnswer: async (req, res) => {
+    
+  }
 };

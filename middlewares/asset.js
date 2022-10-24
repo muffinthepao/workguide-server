@@ -16,12 +16,14 @@ const assetCreationChecks = {
   },
 
   findQuestionAnswers: async (req, res, next) => {
-    const questionId = req.params.questionId
+    const questionId = req.params.questionId;
+    const userId = 1;
 
     // check if user has answered question before
       const findQuestionAnswers = await db.answer.findAll({
         where: {
-          questionId: questionId
+          questionId,
+          userId
         }
       })
 
@@ -29,6 +31,29 @@ const assetCreationChecks = {
         return res
           .status(403)
           .json({ error: "user can only have 1 answer per question" });
+      }
+
+    next()
+  },
+
+  findAnswer: async (req, res, next) => {
+    const questionId = req.params.questionId;
+    const answerId = req.params.answerId;
+    const userId = 1;
+
+    // check if user has answered question before
+      const findQuestionAnswers = await db.answer.findAll({
+        where: {
+          id: answerId,
+          userId,
+          questionId,
+        },
+      })
+
+      if (findQuestionAnswers.length === 0) {
+        return res
+          .status(404)
+          .json({ error: "answer not found" });
       }
 
     next()

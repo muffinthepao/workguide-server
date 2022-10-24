@@ -8,7 +8,7 @@ const answersShotStackController = require('../controllers/answer-shotstack-cont
 const answersUrlController = require('../controllers/answer-url-controller')
 const answersGenericController = require('../controllers/answer-generic-controller')
 const videoUploadsMiddleware = require ('../middlewares/video-processing')
-const assetCreationMiddleWare = require('../middlewares/asset-creation')
+const assetMiddleWare = require('../middlewares/asset')
 
 const router = express.Router()
 
@@ -25,15 +25,15 @@ router.delete('/:questionId/delete', questionsController.deleteQuestion)
 // **** SHOTSTACK ANSWER ROUTES **** //
 // create, update, delete answer
 // router.post('/:questionId/answers', upload.single("file"), videoUploadsMiddleware.uploadVideo, answersShotStackController.create)
-router.post('/:questionId/answers/process-multi', assetCreationMiddleWare.findQuestion, assetCreationMiddleWare.findQuestionAnswers, upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersShotStackController.createShotStackAnswer, videoUploadsMiddleware.mergeVideos, answersShotStackController.insertShotstackIdIntoDB)
-
-// router.delete('/:questionId/answers/delete-shotstack')
+router.post('/:questionId/answers/process-multi', assetMiddleWare.findQuestion, assetMiddleWare.findQuestionAnswers, upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersShotStackController.createShotstackAnswer, videoUploadsMiddleware.mergeVideos, answersShotStackController.insertShotstackIdIntoDB)
 router.post('/shortstack-callback', answersShotStackController.insertShotstackUrlIntoDB)
+router.delete('/:questionId/answers/:answerId/process-multi', videoUploadsMiddleware.deleteVideoUploads, answersShotStackController.deleteShotstackAnswer)
 
 // **** URL ANSWER ROUTES **** //
 // create, update, delete answer
-router.post('/:questionId/answers/url-interstion', assetCreationMiddleWare.findQuestion, assetCreationMiddleWare.findQuestionAnswers, answersUrlController.createUrlAnswer)
-router.patch('/:questionId/answers/:answerId/url-insertion', answersUrlController.updateUrlAnswer)
+router.post('/:questionId/answers/url-interstion', assetMiddleWare.findQuestion, assetMiddleWare.findQuestionAnswers, answersUrlController.createUrlAnswer)
+router.patch('/:questionId/answers/:answerId/url-insertion', assetMiddleWare.findAnswer, answersUrlController.updateUrlAnswer)
+router.delete('/:questionId/answers/:answerId/url-insertion', assetMiddleWare.findAnswer, answersUrlController.deleteUrlAnswer)
 
 //GENERIC ANSWER ROUTES
 router.get('/:questionId/answers', answersGenericController.listAnswers)

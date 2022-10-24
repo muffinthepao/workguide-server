@@ -41,12 +41,41 @@ module.exports = {
         }
       );
 
-      if (answerToUpdate[0] === 0) {
-        res.status(404).json({ error: "answer not found!" });
-        return;
-      }
+      // if (answerToUpdate[0] === 0) {
+      //   res.status(404).json({ error: "answer not found!" });
+      //   return;
+      // }
+
       console.log("answerUpdated", answerToUpdate);
       res.status(200).json({ message: "answer updated!" });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "unable to update answer" });
+    }
+  },
+
+  deleteUrlAnswer: async (req, res) => {
+    const questionId = req.params.questionId;
+    const answerId = req.params.answerId;
+    const userId = 1;
+    
+    try {
+      const answerToUpdate = await db.answer.destroy(
+        {
+          where: {
+            id: answerId,
+            userId,
+            questionId,
+          },
+        }
+      );
+
+      // if (answerToUpdate[0] === 0) {
+      //   res.status(404).json({ error: "answer not found!" });
+      //   return;
+      // }
+      console.log("answerUpdated", answerToUpdate);
+      res.status(200).json({ message: "answer deleted!" });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "unable to update answer" });
