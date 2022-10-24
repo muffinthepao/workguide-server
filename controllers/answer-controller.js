@@ -4,7 +4,26 @@ const answerValidator = require("../joi-validators/answer");
 const db = require("../models");
 
 module.exports = {
-  createAnswer: async (req, res, next) => {
+  createAnswerUsingUrl: async (req, res) => {
+    try {
+      await db.answer.create({
+        answerUrl: req.body.answerUrl,
+        shotstackId: "n/a",
+        imageKitUrls: "n/a",
+        imageKitIds: "n/a",
+        userId: req.body.userId,
+        questionId: req.body.questionId,
+        status: "completed",
+        answerMedthod: "url"
+      });
+
+      res.status(201).json({ message: "answer created!" });
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({ error: "failed to create answer" });
+    }
+  },
+  createAnswerUsingFiles: async (req, res, next) => {
     console.log(" 4 -- reach create Answer step");
 
     // console.log("answer created");

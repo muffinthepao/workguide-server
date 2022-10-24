@@ -22,10 +22,10 @@ router.delete('/:questionId/delete', questionsController.deleteQuestion)
 // router.post('/:questionId/answers', upload.single("file"), videoUploadsMiddleware.uploadVideo, answersController.create)
 
 // create using videobooth or multi file upload
-router.post('/:questionId/answers/process-multi', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersController.createAnswer, videoUploadsMiddleware.mergeVideos, answersController.insertShotstackIdIntoDB)
+router.post('/:questionId/answers/process-multi', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersController.createAnswerUsingFiles, videoUploadsMiddleware.mergeVideos, answersController.insertShotstackIdIntoDB)
 
 //create using URL
-router.post('/:questionId/answers/url-interstion')
+router.post('/:questionId/answers/url-interstion', answersController.createAnswerUsingUrl)
 
 // router.post('/:questionId/answers/create', videoUploadsMiddleware.uploadMultipleVideos, answersController.createAnswer, videoUploadsMiddleware.mergeVideos, answersController.insertShotstackIdIntoDB)
 router.get('/:questionId/answers', answersController.listAnswers)
