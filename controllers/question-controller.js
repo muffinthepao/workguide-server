@@ -1,6 +1,6 @@
 // const bcrypt = require("bcrypt");
 
-const questionValidator = require("../validators/joi-validators/question");
+const questionValidator = require("../joi-validators/question");
 const db = require("../models");
 
 module.exports = {
