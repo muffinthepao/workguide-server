@@ -42,11 +42,11 @@ module.exports = {
         questionId: req.body.questionId,
       });
 
-      console.log("createdAnswer: ", createdAnswer)
+      console.log("createdAnswer: ", createdAnswer);
 
       console.log(" 5 -- record created in db");
       req.body.answerId = createdAnswer.id;
-      console.log(" 6 -- db.answer.id appended to req.body")
+      console.log(" 6 -- db.answer.id appended to req.body");
 
       return next();
       // res.status(201).json({ success: "answer created" });
@@ -56,7 +56,7 @@ module.exports = {
     }
   },
   insertShotstackIdIntoDB: async (req, res, next) => {
-    console.log(" 9 -- start shotstackId insertion")
+    console.log(" 9 -- start shotstackId insertion");
     const shotstackId = req.body.shotstackId;
     const answerId = req.body.answerId;
 
@@ -69,23 +69,23 @@ module.exports = {
           },
         }
       );
-      console.log("answerUpdated", answerUpdated)
-      console.log(" 10 -- successful shotstackId insertion")
-      return next ()
+      console.log("answerUpdated", answerUpdated);
+      console.log(" 10 -- successful shotstackId insertion");
+      return next();
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "unable to update shotstackId" });
     }
   },
   insertShotstackUrlIntoDB: async (req, res) => {
-    console.log(" 11 -- start answerUrl insertion")
-    console.log("11 -- req.body: ,", req.body)
+    console.log(" 11 -- start answerUrl insertion");
+    console.log("11 -- req.body: ,", req.body);
     const shotstackId = req.body.id;
     const shotstackUrl = req.body.url;
 
     try {
       await db.answer.update(
-        { answerUrl: shotstackUrl},
+        { answerUrl: shotstackUrl, status: "completed" },
         {
           where: {
             shotstackId,
@@ -93,8 +93,8 @@ module.exports = {
         }
       );
 
-      console.log(" 12 -- successful shotstackUrl insertion")
-      res.status(201).json({message: "video answer created"})
+      console.log(" 12 -- successful shotstackUrl insertion");
+      res.status(201).json({ message: "video answer created" });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "unable to update shotstackId" });
