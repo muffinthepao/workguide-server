@@ -57,8 +57,8 @@ const videoProcessingMethods = {
             format: "mp4",
             resolution: "sd",
           },
-          // callback:
-          //   "https://workguide-server.herokuapp.com/api/v1/questions/shortstack-callback",
+          callback:
+            "https://workguide-server.herokuapp.com/api/v1/questions/shortstack-callback",
         },
         {
           headers: {
