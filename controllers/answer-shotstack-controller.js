@@ -86,8 +86,10 @@ module.exports = {
     const shotstackId = req.body.id;
     const shotstackUrl = req.body.url;
 
+    // const shotstackId = req.body.shotstackId;
+
     const getAssetbyRenderID = await axios.get(
-      `${process.env.SHOTSTACK_ASSET_URL}/render/c4c5afb1-c13b-47e7-bba2-3035fe7d7b5a`,
+      `${process.env.SHOTSTACK_ASSET_URL}/render/${shotstackId}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -95,6 +97,8 @@ module.exports = {
         },
       }
     );
+
+
 
     const shotstackAssetId = getAssetbyRenderID.data.data[0].attributes
     // console.log("byRenderID: ", getAssetbyRenderID.data.data[0].attributes);
