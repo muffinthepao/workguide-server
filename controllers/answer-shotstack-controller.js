@@ -86,6 +86,10 @@ module.exports = {
     const shotstackId = req.body.id;
     const shotstackUrl = req.body.url;
 
+    if (req.body.status === "failed") {
+      return res.status(503).json({error: "video failed to be created"})
+    }
+
     // const shotstackId = req.body.shotstackId;
 
     const getAssetbyRenderID = await axios.get(
@@ -97,7 +101,6 @@ module.exports = {
         },
       }
     );
-
 
 
     const shotstackAssetId = getAssetbyRenderID.data.data[0].attributes
