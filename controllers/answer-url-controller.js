@@ -8,12 +8,13 @@ module.exports = {
       await db.answer.create({
         answerUrl: req.body.answerUrl,
         shotstackId: "n/a",
+        shotstackAssetId: "n/a",
         imageKitUrls: "n/a",
         imageKitIds: "n/a",
         userId: req.body.userId,
         questionId: req.body.questionId,
         status: "completed",
-        answerMedthod: "url",
+        answerMethod: "url",
       });
 
       res.status(201).json({ message: "answer created!" });

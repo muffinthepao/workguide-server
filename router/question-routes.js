@@ -31,7 +31,8 @@ router.delete('/:questionId/answers/:answerId/process-multi', videoUploadsMiddle
 
 // **** URL ANSWER ROUTES **** //
 // create, update, delete answer
-router.post('/:questionId/answers/url-interstion', assetMiddleWare.findQuestion, assetMiddleWare.findQuestionAnswers, answersUrlController.createUrlAnswer)
+// router.post('/:questionId/answers/url-interstion', assetMiddleWare.findQuestion, assetMiddleWare.findQuestionAnswers, answersUrlController.createUrlAnswer)
+router.post('/:questionId/answers/url-interstion',  answersUrlController.createUrlAnswer)
 router.patch('/:questionId/answers/:answerId/url-insertion', assetMiddleWare.findAnswer, answersUrlController.updateUrlAnswer)
 router.delete('/:questionId/answers/:answerId/url-insertion', assetMiddleWare.findAnswer, answersUrlController.deleteUrlAnswer)
 
