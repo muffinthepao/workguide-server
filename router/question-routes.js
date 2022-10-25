@@ -25,7 +25,7 @@ router.delete('/:questionId/delete', questionsController.deleteQuestion)
 // **** SHOTSTACK ANSWER ROUTES **** //
 // create, update, delete answer
 // router.post('/:questionId/answers', upload.single("file"), videoUploadsMiddleware.uploadVideo, answersShotStackController.create)
-router.post('/:questionId/answers/process-multi', assetMiddleWare.findQuestion, assetMiddleWare.findQuestionAnswers, upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersShotStackController.createShotstackAnswer, videoUploadsMiddleware.mergeVideos, answersShotStackController.insertShotstackIdIntoDB)
+router.post('/:questionId/answers/process-multi', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersShotStackController.createShotstackAnswer, videoUploadsMiddleware.mergeVideos, answersShotStackController.insertShotstackIdIntoDB)
 router.post('/shortstack-callback', answersShotStackController.insertShotstackUrlIntoDB)
 router.delete('/:questionId/answers/:answerId/process-multi', videoUploadsMiddleware.deleteVideoUploads, answersShotStackController.deleteShotstackAnswer)
 

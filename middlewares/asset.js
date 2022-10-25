@@ -27,6 +27,8 @@ const assetCreationChecks = {
         }
       })
 
+      console.log(findQuestionAnswers)
+
       if (findQuestionAnswers.length >= 1) {
         return res
           .status(403)
