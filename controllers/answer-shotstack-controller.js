@@ -34,7 +34,7 @@ module.exports = {
     const questionId = req.params.questionId;
 
     let allImageKitVideoUrls = JSON.stringify(req.body.imageKitUrls);
-    console.log("allImageKitVideoUrls: ", allImageKitVideoUrls)
+    console.log("allImageKitVideoUrls: ", allImageKitVideoUrls);
     let allImageKitVideoIds = JSON.stringify(req.body.imageKitIds);
 
     try {
@@ -83,37 +83,17 @@ module.exports = {
   insertShotstackUrlIntoDB: async (req, res) => {
     console.log(" 11 -- start answerUrl insertion");
     console.log("11 -- req.body: ", req.body);
-    const shotstackId = req.body.id;
+    const shotstackId = req.body.render;
+    const shotstackAssetId = req.body.id;
     const shotstackUrl = req.body.url;
 
     if (req.body.status === "failed") {
-      return res.status(503).json({error: "video failed to be created"})
+      return res.status(503).json({ error: "video failed to be created" });
     }
 
-    // const shotstackId = req.body.shotstackId;
-
-    const getAssetbyRenderID = await axios.get(
-      `${process.env.SHOTSTACK_ASSET_URL}/render/${shotstackId}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": process.env.SHOTSTACK_API_KEY,
-        },
-      }
-    );
-
-    
-
-    const shotstackAssetId = getAssetbyRenderID.data
-    console.log("byRenderID: ", shotstackAssetId);
-    return res.status(200).json({message: "wow"})
-
-    // return console.log("getAssetbyAssetID:" , getAssetbyAssetID.data.data.attributes);
     try {
-     const fullAnswer =  await db.answer.update(
-        { answerUrl: shotstackUrl, 
-          status: "completed", 
-          shotstackAssetId: shotstackAssetId },
+      const fullAnswer = await db.answer.update(
+        { answerUrl: shotstackUrl, status: "completed", shotstackAssetId },
         {
           where: {
             shotstackId,
