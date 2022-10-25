@@ -105,7 +105,7 @@ module.exports = {
     
 
     const shotstackAssetId = getAssetbyRenderID.data
-    console.log("byRenderID: ", );
+    console.log("byRenderID: ", shotstackAssetId);
     return res.status(200).json({message: "wow"})
 
     // return console.log("getAssetbyAssetID:" , getAssetbyAssetID.data.data.attributes);
