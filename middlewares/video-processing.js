@@ -1,6 +1,8 @@
 const axios = require("axios");
 const ImageKit = require("imagekit");
 
+const db = require("../models");
+
 const imagekit = new ImageKit({
   urlEndpoint: process.env.IMAGEKIT_URL_ENDPOINT,
   publicKey: process.env.IMAGEKIT_PUBLICKEY,
@@ -12,6 +14,8 @@ const videoProcessingMethods = {
     console.log(" 7 -- reached merge videos middleware");
     console.log("req.body: ", req.body);
     console.log("req.files: ", req.files);
+
+    req.files =[]
 
     const stringToConvert = req.body.blobDurations;
     const splitStringToArray = stringToConvert.split(",");
@@ -222,14 +226,16 @@ const videoProcessingMethods = {
         imageKitUrls.push(file.url);
       });
       req.body.imageKitIds = imageKitIds;
+      req.body.imageKitUrls = imageKitUrls;
+
       // console.log("req.body", req.body)
-      // console.log("videoIds: ", videoIds)
-      // console.log("videoUrls: ", videoUrls)
+      // console.log("imageKitIds: ", imageKitIds)
+      // console.log("imageKitUrls: ", imageKitUrls)
 
-      // console.log("2 -- req.body", req.body);
-      // console.log("2 -- req.files", req.files);
+      console.log("2 -- req.body", req.body);
+      console.log("2 -- req.files", req.files);
 
-      req.files = imageKitUrls;
+      // req.files = imageKitUrls;
       console.log(" 3 -- Imagekit urls and ids attached to req");
 
       return next();
@@ -240,6 +246,67 @@ const videoProcessingMethods = {
         message: "Video files are required",
       });
     }
+  },
+  deleteVideoUploads: async (req, res, next) => {
+    const questionId = req.params.questionId;
+    const answerId = req.params.answerId;
+    const userId = 1;
+
+    //delete from imagekit
+    try {
+        //get answer record
+        const answer = await db.answer.findAll({
+          where: {
+            id: answerId,
+            userId,
+            questionId,
+          },
+        })
+        
+        console.log("1 -- found answer", answer[0].id)
+
+        if (answer.length === 0) {
+          return res
+            .status(404)
+            .json({ error: "answer not found" });
+        }
+
+        console.log("2 -- identify imagekit and shortstack ids")
+        const imagekitIds= JSON.parse(answer[0].imageKitIds)
+        const shotstackId= answer[0].shotstackId
+
+        console.log(shotstackId)
+        console.log(`${process.env.SHOTSTACK_DELETE_URL}/render/${shotstackId}`)
+
+        console.log("3 -- identified imagekit and shortstack ids")
+
+        console.log("4 -- start of shotstack delete")
+        //send delete request to shotstack will get a 204 response
+        // after call back, needa query for shotstack asset id
+        const shotstackDelete = await axios.delete(
+          // 'https://api.shotstack.io/serve/stage/assets/cd0555a1-194b-4cf8-afe2-ef8c93f35c6d',
+          'https://api.shotstack.io/serve/stage/assets/render/2e51055c-4ef2-4894-a170-d7ae934e6d1d',
+          {
+            headers: {
+              "Content-Type": "application/json",
+              "x-api-key": process.env.SHOTSTACK_API_KEY,
+            },
+          }
+        )
+        return console.log("5 -- end of shotstack delete", shotstackDelete)
+
+
+        
+        //send delete request to imagekit
+        const imagekitDelete = await imagekit.bulkDeleteFiles(imagekitIds)
+
+        console.log("delete imagekit videos respponse: ", imagekitDelete)
+
+        
+
+      } catch (error) {
+        
+      }
   },
 };
 

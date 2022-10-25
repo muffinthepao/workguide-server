@@ -19,6 +19,11 @@ module.exports = {
         allowNull: false,
         defaultValue: "pending"
       },
+      shotstackAssetId: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+        defaultValue: "pending"
+      },
       imageKitUrls:{ 
         type: Sequelize.TEXT,
         allowNull: false
