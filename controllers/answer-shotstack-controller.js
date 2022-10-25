@@ -105,7 +105,7 @@ module.exports = {
 
     // return console.log("getAssetbyAssetID:" , getAssetbyAssetID.data.data.attributes);
     try {
-      await db.answer.update(
+     const fullAnswer =  await db.answer.update(
         { answerUrl: shotstackUrl, status: "completed", shotstackAssetId },
         {
           where: {
@@ -114,7 +114,7 @@ module.exports = {
         }
       );
 
-      console.log(" 12 -- successful shotstackUrl insertion");
+      console.log(" 12 -- successful shotstackUrl insertion", fullAnswer);
       res.status(201).json({ message: "video answer created" });
     } catch (error) {
       console.log(error);
