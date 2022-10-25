@@ -82,7 +82,7 @@ module.exports = {
   },
   insertShotstackUrlIntoDB: async (req, res) => {
     console.log(" 11 -- start answerUrl insertion");
-    console.log("11 -- req.body: ,", req.body);
+    return console.log("11 -- req.body: ,", req.body);
     const shotstackId = req.body.id;
     const shotstackUrl = req.body.url;
 
@@ -92,18 +92,18 @@ module.exports = {
 
     // const shotstackId = req.body.shotstackId;
 
-    // const getAssetbyRenderID = await axios.get(
-    //   `${process.env.SHOTSTACK_ASSET_URL}/render/${shotstackId}`,
-    //   {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "x-api-key": process.env.SHOTSTACK_API_KEY,
-    //     },
-    //   }
-    // );
+    const getAssetbyRenderID = await axios.get(
+      `${process.env.SHOTSTACK_ASSET_URL}/render/${shotstackId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": process.env.SHOTSTACK_API_KEY,
+        },
+      }
+    );
 
 
-    // const shotstackAssetId = getAssetbyRenderID.data.data[0].attributes
+    const shotstackAssetId = getAssetbyRenderID.data.data[0].attributes
     // console.log("byRenderID: ", getAssetbyRenderID.data.data[0].attributes);
 
     // return console.log("getAssetbyAssetID:" , getAssetbyAssetID.data.data.attributes);
