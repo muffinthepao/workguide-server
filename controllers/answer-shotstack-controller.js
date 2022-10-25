@@ -105,12 +105,14 @@ module.exports = {
     
 
     const shotstackAssetId = getAssetbyRenderID.data.data[0].id
-    // return console.log("byRenderID: ", getAssetbyRenderID.data.data[0].id);
+    console.log("byRenderID: ", getAssetbyRenderID.data.data[0].id);
 
     // return console.log("getAssetbyAssetID:" , getAssetbyAssetID.data.data.attributes);
     try {
      const fullAnswer =  await db.answer.update(
-        { answerUrl: shotstackUrl, status: "completed", shotstackAssetId },
+        { answerUrl: shotstackUrl, 
+          status: "completed", 
+          shotstackAssetId: shotstackAssetId },
         {
           where: {
             shotstackId,
