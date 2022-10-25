@@ -23,8 +23,10 @@ const videoProcessingMethods = {
       parseFloat(string)
     );
 
+    console.log(blobDurations)
+
     const videoPartDurations = blobDurations;
-    const imagekitURLs = req.files;
+    const imagekitURLs = req.body.imageKitUrls;
     let shotstackArray = [];
 
     let startingTime = 0;
@@ -45,7 +47,7 @@ const videoProcessingMethods = {
       startingTime += videoPartDurations[i];
       console.log("startingTime: ", startingTime);
     }
-
+    
     try {
       const dataToSend = await axios.post(
         process.env.SHOTSTACK_RENDER_URL,
