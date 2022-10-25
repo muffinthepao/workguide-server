@@ -25,6 +25,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: "pending"
     },
+    shotstackAssetId: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: "pending"
+    },
     imageKitUrls:{ 
       type: DataTypes.TEXT,
       allowNull: false

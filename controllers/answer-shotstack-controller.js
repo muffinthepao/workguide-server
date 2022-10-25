@@ -1,5 +1,5 @@
 // const bcrypt = require("bcrypt");
-
+const axios = require("axios");
 const answerValidator = require("../joi-validators/answer");
 const db = require("../models");
 
@@ -30,14 +30,13 @@ module.exports = {
     // }
 
     // let validatedAnswer = { ...answerValidationResults.value };
-  
-    const questionId = req.params.questionId
+
+    const questionId = req.params.questionId;
 
     let allImageKitVideoUrls = JSON.stringify(req.files);
     let allImageKitVideoIds = JSON.stringify(req.body.imageKitIds);
 
     try {
-
       const createdAnswer = await db.answer.create({
         imageKitUrls: allImageKitVideoUrls,
         imageKitIds: allImageKitVideoIds,
@@ -86,12 +85,27 @@ module.exports = {
     const shotstackId = req.body.id;
     const shotstackUrl = req.body.url;
 
+    const getAssetbyRenderID = await axios.get(
+      `${process.env.SHOTSTACK_ASSET_URL}/render/c4c5afb1-c13b-47e7-bba2-3035fe7d7b5a`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": process.env.SHOTSTACK_API_KEY,
+        },
+      }
+    );
+
+    const shotstackAssetId = getAssetbyRenderID.data.data[0].attributes
+    // console.log("byRenderID: ", getAssetbyRenderID.data.data[0].attributes);
+
+    // return console.log("getAssetbyAssetID:" , getAssetbyAssetID.data.data.attributes);
     try {
       await db.answer.update(
         { answerUrl: shotstackUrl, status: "completed" },
         {
           where: {
             shotstackId,
+            shotstackAssetId,
           },
         }
       );
@@ -103,7 +117,5 @@ module.exports = {
       res.status(500).json({ message: "unable to update shotstackId" });
     }
   },
-  deleteShotstackAnswer: async (req, res) => {
-    
-  }
+  deleteShotstackAnswer: async (req, res) => {},
 };

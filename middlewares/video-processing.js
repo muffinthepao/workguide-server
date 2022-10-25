@@ -277,10 +277,11 @@ const videoProcessingMethods = {
         console.log("3 -- identified imagekit and shortstack ids")
 
         console.log("4 -- start of shotstack delete")
-        //send delete request to shotstack
+        //send delete request to shotstack will get a 204 response
+        // after call back, needa query for shotstack asset id
         const shotstackDelete = await axios.delete(
-          'https://api.shotstack.io/serve/stage/assets/cd0555a1-194b-4cf8-afe2-ef8c93f35c6d',
-          // 'https://api.shotstack.io/serve/stage/assets/render/2e51055c-4ef2-4894-a170-d7ae934e6d1d',
+          // 'https://api.shotstack.io/serve/stage/assets/cd0555a1-194b-4cf8-afe2-ef8c93f35c6d',
+          'https://api.shotstack.io/serve/stage/assets/render/2e51055c-4ef2-4894-a170-d7ae934e6d1d',
           {
             headers: {
               "Content-Type": "application/json",
