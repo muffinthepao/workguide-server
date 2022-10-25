@@ -7,6 +7,7 @@ const assetCreationChecks = {
     const findQuestion = await db.question.findByPk(questionId)
 
     if (!findQuestion) {
+      console.log("question not found!")
       return res
         .status(404)
         .json({ error: "question not found!" });
@@ -30,6 +31,7 @@ const assetCreationChecks = {
       console.log(findQuestionAnswers)
 
       if (findQuestionAnswers.length >= 1) {
+        console.log("user can only have 1 answer per question")
         return res
           .status(403)
           .json({ error: "user can only have 1 answer per question" });
@@ -53,6 +55,7 @@ const assetCreationChecks = {
       })
 
       if (findQuestionAnswers.length === 0) {
+        console.log("answer not found!")
         return res
           .status(404)
           .json({ error: "answer not found" });

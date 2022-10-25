@@ -161,7 +161,7 @@ module.exports = {
           .json({ error: "Cannot delete Qns that already have answers" });
       }
 
-     const qnsToUpdate =  await db.question.destroy(
+     const questionToDelete =  await db.question.destroy(
         {
           where: {
             id: questionId,
@@ -170,7 +170,7 @@ module.exports = {
         }
       );
 
-      if (qnsToUpdate[0] === 0) {
+      if (questionToDelete[0] === 0) {
         return res.status(404).json({ message: "Oops, question now found!" });
       }
 

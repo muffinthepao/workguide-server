@@ -24,14 +24,14 @@ router.delete('/:questionId/delete', questionsController.deleteQuestion)
 
 // **** SHOTSTACK ANSWER ROUTES **** //
 // create, update, delete answer
-// router.post('/:questionId/answers', upload.single("file"), videoUploadsMiddleware.uploadVideo, answersShotStackController.create)
 router.post('/:questionId/answers/process-multi', upload.any("files"), videoUploadsMiddleware.uploadMultipleVideos, answersShotStackController.createShotstackAnswer, videoUploadsMiddleware.mergeVideos, answersShotStackController.insertShotstackIdIntoDB)
 router.post('/shortstack-callback', answersShotStackController.insertShotstackUrlIntoDB)
-router.delete('/:questionId/answers/:answerId/process-multi', videoUploadsMiddleware.deleteVideoUploads, answersShotStackController.deleteShotstackAnswer)
+router.delete('/:questionId/answers/:answerId/process-multi', assetMiddleWare.findAnswer, videoUploadsMiddleware.deleteVideoUploads, answersShotStackController.deleteShotstackAnswer)
 
 // **** URL ANSWER ROUTES **** //
 // create, update, delete answer
-router.post('/:questionId/answers/url-interstion', assetMiddleWare.findQuestion, assetMiddleWare.findQuestionAnswers, answersUrlController.createUrlAnswer)
+// router.post('/:questionId/answers/url-interstion', assetMiddleWare.findQuestion, assetMiddleWare.findQuestionAnswers, answersUrlController.createUrlAnswer)
+router.post('/:questionId/answers/url-interstion',  answersUrlController.createUrlAnswer)
 router.patch('/:questionId/answers/:answerId/url-insertion', assetMiddleWare.findAnswer, answersUrlController.updateUrlAnswer)
 router.delete('/:questionId/answers/:answerId/url-insertion', assetMiddleWare.findAnswer, answersUrlController.deleteUrlAnswer)
 

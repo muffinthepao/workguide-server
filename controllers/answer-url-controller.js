@@ -8,12 +8,13 @@ module.exports = {
       await db.answer.create({
         answerUrl: req.body.answerUrl,
         shotstackId: "n/a",
+        shotstackAssetId: "n/a",
         imageKitUrls: "n/a",
         imageKitIds: "n/a",
         userId: req.body.userId,
         questionId: req.body.questionId,
         status: "completed",
-        answerMedthod: "url",
+        answerMethod: "url",
       });
 
       res.status(201).json({ message: "answer created!" });
@@ -60,7 +61,7 @@ module.exports = {
     const userId = 1;
     
     try {
-      const answerToUpdate = await db.answer.destroy(
+      const answerToDelete = await db.answer.destroy(
         {
           where: {
             id: answerId,
@@ -74,7 +75,7 @@ module.exports = {
       //   res.status(404).json({ error: "answer not found!" });
       //   return;
       // }
-      console.log("answerUpdated", answerToUpdate);
+      console.log("answerToDelete", answerToDelete);
       res.status(200).json({ message: "answer deleted!" });
     } catch (error) {
       console.log(error);
