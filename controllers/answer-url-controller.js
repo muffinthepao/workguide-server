@@ -61,7 +61,7 @@ module.exports = {
     const userId = 1;
     
     try {
-      const answerToUpdate = await db.answer.destroy(
+      const answerToDelete = await db.answer.destroy(
         {
           where: {
             id: answerId,
@@ -75,7 +75,7 @@ module.exports = {
       //   res.status(404).json({ error: "answer not found!" });
       //   return;
       // }
-      console.log("answerUpdated", answerToUpdate);
+      console.log("answerToDelete", answerToDelete);
       res.status(200).json({ message: "answer deleted!" });
     } catch (error) {
       console.log(error);

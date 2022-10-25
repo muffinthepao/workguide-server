@@ -39,3 +39,11 @@
 //   "error": null,
 //   "completed": "2022-10-25T12:57:20.770Z"
 // }
+
+// delete imagekit videos respponse:  {
+//   successfullyDeletedFileIds: [
+//     '6357e79cbf51c1dc808721b0',
+//     '6357e79bbf51c1dc80871c8e',
+//     '6357e79abf51c1dc80871a5d'
+//   ]
+// }
