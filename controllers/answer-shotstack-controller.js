@@ -92,15 +92,15 @@ module.exports = {
 
     // const shotstackId = req.body.shotstackId;
 
-    const getAssetbyRenderID = await axios.get(
-      `${process.env.SHOTSTACK_ASSET_URL}/render/${shotstackId}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": process.env.SHOTSTACK_API_KEY,
-        },
-      }
-    );
+    // const getAssetbyRenderID = await axios.get(
+    //   `${process.env.SHOTSTACK_ASSET_URL}/render/${shotstackId}`,
+    //   {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       "x-api-key": process.env.SHOTSTACK_API_KEY,
+    //     },
+    //   }
+    // );
 
 
     const shotstackAssetId = getAssetbyRenderID.data.data[0].attributes
