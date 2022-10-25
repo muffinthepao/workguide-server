@@ -33,7 +33,8 @@ module.exports = {
 
     const questionId = req.params.questionId;
 
-    let allImageKitVideoUrls = JSON.stringify(req.files);
+    let allImageKitVideoUrls = JSON.stringify(req.body.imageKitUrls);
+    console.log("allImageKitVideoUrls: ", allImageKitVideoUrls)
     let allImageKitVideoIds = JSON.stringify(req.body.imageKitIds);
 
     try {

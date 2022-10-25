@@ -15,6 +15,8 @@ const videoProcessingMethods = {
     console.log("req.body: ", req.body);
     console.log("req.files: ", req.files);
 
+    req.files =[]
+
     const stringToConvert = req.body.blobDurations;
     const splitStringToArray = stringToConvert.split(",");
     const blobDurations = splitStringToArray.map((string) =>
@@ -55,8 +57,8 @@ const videoProcessingMethods = {
             format: "mp4",
             resolution: "sd",
           },
-          callback:
-            "https://workguide-server.herokuapp.com/api/v1/questions/shortstack-callback",
+          // callback:
+          //   "https://workguide-server.herokuapp.com/api/v1/questions/shortstack-callback",
         },
         {
           headers: {
@@ -224,14 +226,16 @@ const videoProcessingMethods = {
         imageKitUrls.push(file.url);
       });
       req.body.imageKitIds = imageKitIds;
+      req.body.imageKitUrls = imageKitUrls;
+
       // console.log("req.body", req.body)
-      // console.log("videoIds: ", videoIds)
-      // console.log("videoUrls: ", videoUrls)
+      // console.log("imageKitIds: ", imageKitIds)
+      // console.log("imageKitUrls: ", imageKitUrls)
 
-      // console.log("2 -- req.body", req.body);
-      // console.log("2 -- req.files", req.files);
+      console.log("2 -- req.body", req.body);
+      console.log("2 -- req.files", req.files);
 
-      req.files = imageKitUrls;
+      // req.files = imageKitUrls;
       console.log(" 3 -- Imagekit urls and ids attached to req");
 
       return next();
