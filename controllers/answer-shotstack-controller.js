@@ -82,7 +82,7 @@ module.exports = {
   },
   insertShotstackUrlIntoDB: async (req, res) => {
     console.log(" 11 -- start answerUrl insertion");
-    return console.log("11 -- req.body: ,", req.body);
+    console.log("11 -- req.body: ,", req.body);
     const shotstackId = req.body.id;
     const shotstackUrl = req.body.url;
 
@@ -96,15 +96,16 @@ module.exports = {
       `${process.env.SHOTSTACK_ASSET_URL}/render/${shotstackId}`,
       {
         headers: {
-          "Content-Type": "application/json",
+          "Accept": "application/json",
           "x-api-key": process.env.SHOTSTACK_API_KEY,
         },
       }
     );
 
+    
 
-    const shotstackAssetId = getAssetbyRenderID.data.data[0].attributes
-    // console.log("byRenderID: ", getAssetbyRenderID.data.data[0].attributes);
+    const shotstackAssetId = getAssetbyRenderID.data.data[0].id
+    // return console.log("byRenderID: ", getAssetbyRenderID.data.data[0].id);
 
     // return console.log("getAssetbyAssetID:" , getAssetbyAssetID.data.data.attributes);
     try {
