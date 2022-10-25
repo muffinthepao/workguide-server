@@ -96,7 +96,7 @@ module.exports = {
       `${process.env.SHOTSTACK_ASSET_URL}/render/${shotstackId}`,
       {
         headers: {
-          "Accept": "application/json",
+          "Content-Type": "application/json",
           "x-api-key": process.env.SHOTSTACK_API_KEY,
         },
       }
