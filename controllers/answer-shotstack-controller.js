@@ -103,7 +103,7 @@ module.exports = {
     // );
 
 
-    const shotstackAssetId = getAssetbyRenderID.data.data[0].attributes
+    // const shotstackAssetId = getAssetbyRenderID.data.data[0].attributes
     // console.log("byRenderID: ", getAssetbyRenderID.data.data[0].attributes);
 
     // return console.log("getAssetbyAssetID:" , getAssetbyAssetID.data.data.attributes);
