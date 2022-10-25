@@ -101,11 +101,10 @@ module.exports = {
     // return console.log("getAssetbyAssetID:" , getAssetbyAssetID.data.data.attributes);
     try {
       await db.answer.update(
-        { answerUrl: shotstackUrl, status: "completed" },
+        { answerUrl: shotstackUrl, status: "completed", shotstackAssetId },
         {
           where: {
             shotstackId,
-            shotstackAssetId,
           },
         }
       );
