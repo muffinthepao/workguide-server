@@ -15,7 +15,7 @@ module.exports = {
     await queryInterface.changeColumn("questionsCategories", "categoryId", {
       type: Sequelize.INTEGER,
       references: {
-        model: "categorys",
+        model: "categories",
         key: "id",
       },
       onDelete: "CASCADE",
