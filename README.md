@@ -6,4 +6,5 @@ challenges
 
 seeding data
 - using sequelize
+- must be an array in the seed file
 - createdAt and UpdatedAt cannot be null. You have to see the date to `new Date()`

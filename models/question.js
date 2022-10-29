@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.question.belongsTo(models.user),
-      models.question.hasMany(models.answer)
+      models.question.hasMany(models.answer),
+      models.question.belongsToMany(models.category, {through: "questionsCategories"})
     }
   }
   question.init({
