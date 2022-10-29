@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert("categories", [
+    await queryInterface.bulkInsert("categorys", [
       {
         category: "Changing Careers",
         createdAt: new Date(),
@@ -75,6 +75,11 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        category: "Work Relationships",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
         category: "Workplace Culture",
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -88,6 +93,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("categories", nill, {});
+    await queryInterface.bulkDelete("categorys", {});
   },
 };
