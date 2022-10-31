@@ -75,6 +75,11 @@ module.exports = {
         updatedAt: new Date(),
       },
       {
+        category: "Work Relationships",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
         category: "Workplace Culture",
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -88,6 +93,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("categories", nill, {});
+    await queryInterface.bulkDelete("categories", {});
   },
 };

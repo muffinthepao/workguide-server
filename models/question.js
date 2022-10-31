@@ -12,11 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.question.belongsTo(models.user),
-      models.question.hasMany(models.answer)
+      models.question.hasMany(models.answer),
+      models.question.belongsToMany(models.category, {through: "questionsCategories"})
     }
   }
   question.init({
-    question: {
+    title: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
@@ -24,9 +25,6 @@ module.exports = (sequelize, DataTypes) => {
      type: DataTypes.INTEGER,
      allowNull: false
     }, 
-    category: {
-      type: DataTypes.STRING,
-    },
   }, {
     sequelize,
     modelName: 'question',

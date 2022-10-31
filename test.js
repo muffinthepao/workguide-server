@@ -74,5 +74,31 @@
 
 // console.log(blob)
 
-
 // https://cdn.shotstack.io/au/stage/uk0zmjja7i/c4c5afb1-c13b-47e7-bba2-3035fe7d7b5a.mp4
+const db = require("./models");
+
+async function init() {
+  // const category = await db.category.findOne({
+  //   where: {category: "Productivity"}
+  // });
+
+  // console.log(category)
+
+  // const questions = await category.getQuestions();
+  // console.log(" =====> These posts are tagged with " + category.category + ":");
+  // questions.forEach((question) => {
+  //   console.log(" =====> Question title: " + question.question);
+  // });
+
+  const question = await db.question.findByPk(2, {
+    include: {
+      model: db.category,
+      attribute: ["category"]
+    },
+  });
+
+  console.log("get CATEGORY from include ===========>", question.categories[1].category);
+  console.log("get CATEGORY from include ===========>", question.categories[0].category)
+}
+
+init();

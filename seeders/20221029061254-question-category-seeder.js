@@ -1,0 +1,337 @@
+'use strict';
+
+/** @type {import('sequelize-cli').Migration} */
+module.exports = {
+  async up (queryInterface, Sequelize) {
+    await queryInterface.bulkInsert("questionsCategories", [
+      {
+        questionId: 1,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 2,
+        categoryId: 6,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 2,
+        categoryId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 2,
+        categoryId: 9,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 3,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 3,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 4,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 4,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 5,
+        categoryId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 6,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 6,
+        categoryId: 14,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 6,
+        categoryId: 13,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 7,
+        categoryId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 7,
+        categoryId: 9,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 8,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 9,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 9,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 10,
+        categoryId: 14,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 10,
+        categoryId: 13,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 11,
+        categoryId: 5,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 12,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 13,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 13,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 14,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 15,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 16,
+        categoryId: 9,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 17,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 17,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 18,
+        categoryId: 9,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 19,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 19,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 20,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 20,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 20,
+        categoryId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 21,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 22,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 23,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 23,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 24,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 25,
+        categoryId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 25,
+        categoryId: 11,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 26,
+        categoryId: 9,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 27,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 27,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 27,
+        categoryId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 28,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 29,
+        categoryId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 29,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 30,
+        categoryId: 17,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 30,
+        categoryId: 5,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 30,
+        categoryId: 9,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 31,
+        categoryId: 9,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 31,
+        categoryId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        questionId: 31,
+        categoryId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ])
+  },
+
+  async down (queryInterface, Sequelize) {
+    await queryInterface.bulkDelete("questionsCategories", {});
+  }
+};

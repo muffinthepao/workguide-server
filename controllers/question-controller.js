@@ -39,7 +39,13 @@ module.exports = {
     try {
       let listQuestions = await db.question.findAll({
         // raw: true, //with out without raw, the json sent over will still be in raw format
-        attributes: ["id", "question", "userId", "category"],
+        attributes: ["id", "title", "userId","createdAt"],
+        include:{
+          model: db.category,
+          through: {
+            attributes:[]
+          }
+        }
       });
 
       console.log(listQuestions);
@@ -56,7 +62,7 @@ module.exports = {
     try {
       let showQuestion = await db.question.findByPk(pk, {
         // raw: true, //with out without raw, the json sent over will still be in raw format
-        attributes: ["id", "question", "userId", "category"],
+        attributes: ["id", "question", "userId"],
       });
       // res.status(201).json({ success: "question created" });
 
