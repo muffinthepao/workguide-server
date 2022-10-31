@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   question.init({
-    question: {
+    title: {
       type: DataTypes.TEXT,
       allowNull: false,
     },

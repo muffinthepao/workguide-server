@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      question: {
+      title: {
         type: Sequelize.TEXT,
         allowNull: false,
       },
