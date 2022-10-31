@@ -1,18 +1,38 @@
-
 const answerValidator = require("../joi-validators/answer");
 const db = require("../models");
 
 module.exports = {
   createUrlAnswer: async (req, res) => {
+    console.log(req.body.data);
+
+    let errorObject = {};
+
+    const answerValidationResults = answerValidator.createUrlAnswer.validate(
+      req.body.data,
+      {
+        abortEarly: false,
+      }
+    );
+
+    if (answerValidationResults.error) {
+      const validationError = answerValidationResults.error.details;
+
+      validationError.forEach((error) => {
+        errorObject[error.context.key] = error.message;
+      });
+
+      return res.status(400).json(errorObject);
+    }
+
     try {
       await db.answer.create({
-        answerUrl: req.body.answerUrl,
+        answerUrl: req.body.data.answerUrl,
         shotstackId: "n/a",
         shotstackAssetId: "n/a",
         imageKitUrls: "n/a",
         imageKitIds: "n/a",
-        userId: req.body.userId,
-        questionId: req.body.questionId,
+        userId: 1,
+        questionId: req.params.questionId,
         status: "completed",
         answerMethod: "url",
       });
@@ -59,17 +79,15 @@ module.exports = {
     const questionId = req.params.questionId;
     const answerId = req.params.answerId;
     const userId = 1;
-    
+
     try {
-      const answerToDelete = await db.answer.destroy(
-        {
-          where: {
-            id: answerId,
-            userId,
-            questionId,
-          },
-        }
-      );
+      const answerToDelete = await db.answer.destroy({
+        where: {
+          id: answerId,
+          userId,
+          questionId,
+        },
+      });
 
       // if (answerToUpdate[0] === 0) {
       //   res.status(404).json({ error: "answer not found!" });
@@ -82,5 +100,4 @@ module.exports = {
       res.status(500).json({ error: "unable to update answer" });
     }
   },
-  
 };

@@ -28,5 +28,5 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Workguide app listening on port ${port}`);
+    console.log(`Workguide Server listening on port ${port}`);
 });
