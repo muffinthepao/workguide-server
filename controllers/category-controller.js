@@ -6,7 +6,7 @@ module.exports = {
       let allCategories = await db.category.findAll({
         attributes: ["id", "category"],
       });
-      console.log("allCategories", allCategories);
+
       res.status(200).json(allCategories);
     } catch (error) {
       console.log(error);
