@@ -32,22 +32,20 @@ module.exports = {
         title: validatedQuestion.title,
         userId: validatedQuestion.userId,
       });
-      
+
       validatedQuestion.categories.forEach(async (category) => {
         const categoryEntry = await db.category.findByPk(category.value);
-  
+
         await newQuestion.addCategory(categoryEntry, {
           through: "questionsCategories",
         });
       });
 
-      res.status(201).json({message: "question created!"})
+      res.status(201).json({ message: "question created!" });
     } catch (error) {
-      console.log(error)
-      res.status(500).json({message: "failed to create question!"})
+      console.log(error);
+      res.status(500).json({ message: "failed to create question!" });
     }
-
-
   },
 
   // createQuestion: async (req, res) => {
@@ -81,14 +79,18 @@ module.exports = {
     let pk = req.params.questionId;
 
     try {
-      let showQuestion = await db.question.findByPk(pk, {
-        // raw: true, //with out without raw, the json sent over will still be in raw format
-        attributes: ["id", "question", "userId"],
-      });
+      let showQuestion = await db.question.findByPk(
+        pk,
+        // {
+        //   // raw: true, //with out without raw, the json sent over will still be in raw format
+        //   attributes: ["id", "title", "userId"],
+        // },
+        { include: ["answers"]}
+      );
       // res.status(201).json({ success: "question created" });
 
       console.log(showQuestion);
-      res.status(200).json(showQuestion);
+      res.status(200).json( showQuestion );
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "failed to get question" });
