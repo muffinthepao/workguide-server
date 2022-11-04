@@ -25,27 +25,48 @@ module.exports = {
 
     let validatedQuestion = { ...questionValidationResults.value };
 
-    try {
-      await db.question.create(validatedQuestion);
+    console.log(validatedQuestion);
 
-      res.status(201).json({ success: "question created" });
+    try {
+      const newQuestion = await db.question.create({
+        title: validatedQuestion.title,
+        userId: validatedQuestion.userId,
+      });
+      
+      validatedQuestion.categories.forEach(async (category) => {
+        const categoryEntry = await db.category.findByPk(category.value);
+  
+        await newQuestion.addCategory(categoryEntry, {
+          through: "questionsCategories",
+        });
+      });
+
+      res.status(201).json({message: "question created!"})
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: "failed to create question" });
+      console.log(error)
+      res.status(500).json({message: "failed to create question!"})
     }
+
+
   },
+
+  // createQuestion: async (req, res) => {
+  //   // joi validations for question inputs
+  //   console.log(req.body)
+  //   res.status(201).json(req.body)
+  // },
 
   listQuestions: async (req, res) => {
     try {
       let listQuestions = await db.question.findAll({
         // raw: true, //with out without raw, the json sent over will still be in raw format
-        attributes: ["id", "title", "userId","createdAt"],
-        include:{
+        attributes: ["id", "title", "userId", "createdAt"],
+        include: {
           model: db.category,
           through: {
-            attributes:[]
-          }
-        }
+            attributes: [],
+          },
+        },
       });
 
       console.log(listQuestions);
@@ -98,12 +119,11 @@ module.exports = {
     // let validatedQuestion = { ...questionValidationResults.value };
 
     try {
-
       const findQuestionAnswers = await db.answer.findAll({
         where: {
-          questionId: questionId
-        }
-      })
+          questionId: questionId,
+        },
+      });
 
       if (findQuestionAnswers.length >= 1) {
         return res
@@ -111,7 +131,7 @@ module.exports = {
           .json({ error: "Cannot update Qns that already have answers" });
       }
 
-     const qnsToUpdate =  await db.question.update(
+      const qnsToUpdate = await db.question.update(
         { ...req.body },
         {
           where: {
@@ -130,7 +150,6 @@ module.exports = {
       console.log(error);
       return res.status(500).json({ error: "failed to update question" });
     }
-
   },
 
   deleteQuestion: async (req, res) => {
@@ -157,9 +176,9 @@ module.exports = {
     try {
       const findQuestionAnswers = await db.answer.findAll({
         where: {
-          questionId: questionId
-        }
-      })
+          questionId: questionId,
+        },
+      });
 
       if (findQuestionAnswers.length >= 1) {
         return res
@@ -167,14 +186,12 @@ module.exports = {
           .json({ error: "Cannot delete Qns that already have answers" });
       }
 
-     const questionToDelete =  await db.question.destroy(
-        {
-          where: {
-            id: questionId,
-            userId: userId,
-          },
-        }
-      );
+      const questionToDelete = await db.question.destroy({
+        where: {
+          id: questionId,
+          userId: userId,
+        },
+      });
 
       if (questionToDelete[0] === 0) {
         return res.status(404).json({ message: "Oops, question now found!" });
@@ -186,6 +203,4 @@ module.exports = {
       return res.status(500).json({ error: "failed to delete question" });
     }
   },
-
-
 };
