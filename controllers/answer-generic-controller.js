@@ -12,15 +12,16 @@ module.exports = {
         where: {
           questionId,
         },
-        attributes: ["id", "answerURL", "userId", "questionId"],
+        attributes: ["id", "answerUrl"],
       });
+      
 
       let FormatAnswersToQuestion = answersToQuestion.forEach((answer) => {
-        answersArray.push(JSON.parse(answer.answerURL));
+        answersArray.push(answer.answerUrl);
       });
 
       answersArray.forEach(
-        (answer, index) => (answersToQuestion[index].answerURL = answer)
+        (answer, index) => (answersToQuestion[index].answerUrl = answer)
       );
 
       console.log("answersToQuestion", answersToQuestion);
