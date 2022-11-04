@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken")
 
 const userValidator = require("../joi-validators/users");
 const db = require("../models");
@@ -43,11 +44,28 @@ module.exports = {
       // console.log("created: ", created);
 
       if (created) {
-        res.status(201).json({ success: "user created" });
+
+
+        const userData = {
+          id: user.dataValues.id,
+          fullName: user.dataValues.fullName,
+          preferredName: user.dataValues.preferredName,
+          email: user.dataValues.email
+        }
+
+        const token = jwt.sign(
+          {
+            exp: Math.floor(Date.now() / 1000) + 60 * 60, // 1 hour
+            data: userData,
+          },
+          process.env.JWT_SECRET
+        )
+
+       return res.status(201).json({ userData, token });
       }
 
       if (!created) {
-        res.status(400).json({ success: "user exists" });
+       return res.status(400).json({ success: "user exists" });
       }
     } catch (error) {
       console.log(error);
