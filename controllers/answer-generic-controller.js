@@ -1,6 +1,7 @@
 // const bcrypt = require("bcrypt");
 
 const answerValidator = require("../joi-validators/answer");
+const { Op } = require("sequelize");
 const db = require("../models");
 
 module.exports = {
@@ -11,6 +12,7 @@ module.exports = {
       let answersToQuestion = await db.answer.findAll({
         where: {
           questionId,
+          answerUrl: {[Op.not]: "pending"}
         },
         attributes: ["id", "answerUrl"],
       });
