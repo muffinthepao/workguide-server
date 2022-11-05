@@ -53,7 +53,7 @@ Learning Challenges
 - If you use `.findAll()` without WHERE parameter, it returns an OBJECT
 - If you use `.findAll()` with WHERE parameter, it returns an ARRAY and further wrapped in a "dataValues" OBJECT
 - The different functions of Sequelize
-- Deeding data using the built in seeding functions
+- Seeding data using the built in seeding functions
 - Using sequelize
 - Must be an array in the seed file
 - VreatedAt and UpdatedAt cannot be null. You have to see the date to `new Date()`
@@ -62,6 +62,8 @@ Learning Challenges
 - Thinking about UX and allowing for users to submit video answers multiple ways - URL, file upload, videoBooth
 - Drag and Drop zone for video file upload
 - Using React Hook Form on 2 separate forms that are present on the same page
+- Extracting the duration of recorded videos and uploaded videos. There is a bug in node where you `console.log(video.duration)`, the output is `NaN`. Then when you `.parstInt(video.duration)` the output becomes infinity
+
 ___
 ## Still to be solved
 - How does the app handle duplicate questions?
@@ -71,6 +73,11 @@ ___
 - Since the video parts are stored on browser cache, and my demos are all less than 30secs each. We might face an issue when each video part is a max of 1min. Not sure whether chrome will crash
 - currently there are many points of failure for the video booth ask I am using 2 video processing apis with ExpressJs as the server between the Client, ImageKit, and Shotstack. I can lose connectivty to each of those any any point. And the video creation will be unsuccessful
 ___
-##Points to improve
-- Created wireframes for project3 but not for this project. Felt myself wasting time refining the design as i was coding along. Sometimes I got confuses on what I wanted or what I was doing.
-- 
+##Points to improve / Things left to do
+- Created wireframes for project3 but not for this project. Felt myself wasting time refining the design as i was coding along. Sometimes I got confuses on what I wanted or what I was doing
+- Filter questions by category
+- Ask Question currently doesn't validate categories. Can submit without categories
+- Bookmark a Question
+- Like an Answer
+- Share and Answer
+- Maybe a global login/register modal that can be invoke as and when throughout the app
