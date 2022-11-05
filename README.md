@@ -2,6 +2,8 @@
 Navigating through work can be tough.
 Don't go at it alone. Get a local guide.
 ___
+App URL: https://main--workguide.netlify.app/
+___
 A site that aims to solve 3 problems
 - Fresh Grads / Fresh Hires get their buring questions about work answered through video answers
 - There is a shortage of career guides/mentors and those that do get a slot, ask the same questions 80% of the time (pareto). This app aims to free up the guides/mentors' time by recording their answer once and uploading it onto the site. Now guides/mentors are able to use their valuable time for the 20% typy of questions
