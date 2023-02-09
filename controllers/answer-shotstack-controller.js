@@ -5,7 +5,7 @@ const db = require("../models");
 
 module.exports = {
   createShotstackAnswer: async (req, res, next) => {
-    console.log(" 4 -- reach create Answer step");
+    console.log(" VideoBooth 4 -- reach create Answer step");
 
     // console.log("answer created");
     // console.log("4 -- req.body: ", req.body);
@@ -47,9 +47,9 @@ module.exports = {
 
       console.log("createdAnswer: ", createdAnswer);
 
-      console.log(" 5 -- record created in db");
+      console.log(" VideoBooth 5 -- record created in db");
       req.body.answerId = createdAnswer.id;
-      console.log(" 6 -- db.answer.id appended to req.body");
+      console.log(" VideoBooth 6 -- db.answer.id appended to req.body");
 
       return next();
       // res.status(201).json({ success: "answer created" });
@@ -59,7 +59,7 @@ module.exports = {
     }
   },
   insertShotstackIdIntoDB: async (req, res, next) => {
-    console.log(" 9 -- start shotstackId insertion");
+    console.log(" VideoBooth 9 -- start shotstackId insertion");
     const shotstackId = req.body.shotstackId;
     const answerId = req.body.answerId;
 
@@ -73,7 +73,7 @@ module.exports = {
         }
       );
       console.log("answerUpdated", answerUpdated);
-      console.log(" 10 -- successful shotstackId insertion");
+      console.log(" VideoBooth 10 -- successful shotstackId insertion");
       return next();
     } catch (error) {
       console.log(error);
@@ -81,7 +81,7 @@ module.exports = {
     }
   },
   insertShotstackUrlIntoDB: async (req, res) => {
-    console.log(" 11 -- start answerUrl insertion");
+    console.log(" VideoBooth 11 -- start answerUrl insertion");
     console.log("11 -- req.body: ", req.body);
     const shotstackId = req.body.render;
     const shotstackAssetId = req.body.id;
@@ -101,7 +101,7 @@ module.exports = {
         }
       );
 
-      console.log(" 12 -- successful shotstackUrl insertion", fullAnswer);
+      console.log(" VideoBooth 12 -- successful shotstackUrl insertion", fullAnswer);
       res.status(201).json({ message: "video answer created" });
     } catch (error) {
       console.log(error);

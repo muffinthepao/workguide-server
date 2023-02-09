@@ -11,9 +11,9 @@ const imagekit = new ImageKit({
 
 const videoProcessingMethods = {
   mergeVideos: async (req, res, next) => {
-    console.log(" 7 -- reached merge videos middleware");
-    console.log("req.body: ", req.body);
-    console.log("req.files: ", req.files);
+    console.log(" VideoBooth 7 -- reached merge videos middleware");
+    // console.log("req.body: ", req.body);
+    // console.log("req.files: ", req.files);
 
     req.files = [];
 
@@ -60,7 +60,7 @@ const videoProcessingMethods = {
             resolution: "sd",
           },
           callback:
-            "https://workguide-server.herokuapp.com/api/v1/questions/shortstack-callback",
+            "https://workguide-server.onrender.com/api/v1/questions/shortstack-callback",
         },
         {
           headers: {
@@ -77,7 +77,7 @@ const videoProcessingMethods = {
           success:
             "we are merging your video answer! Please checkback when in a few minutes",
         });
-        console.log(" 8 -- shotstack queue stuccess");
+        console.log(" VideoBooth 8 -- shotstack queue success");
         return next();
       } else {
         console.log(data);
@@ -136,7 +136,7 @@ const videoProcessingMethods = {
     return next();
   },
   uploadMultipleVideos: async (req, res, next) => {
-    console.log(" 1 -- reached upload videos middleware");
+    console.log(" VideoBooth 1 -- reached upload videos middleware");
     // console.log("1 -- req.body", req.body);
     // console.log("1 -- req.body", req.body.blobDurations);
     // console.log("1 -- req.body", typeof req.body.blobDurations);
@@ -176,7 +176,7 @@ const videoProcessingMethods = {
         });
       });
       const fileUrls = await Promise.all(promises); //returns a single promise of promises
-      console.log(" 2 -- files rendered by Imagekit");
+      console.log(" VideoBooth 2 -- files rendered by Imagekit");
 
       // let fileUrls = [
       //   {
@@ -234,11 +234,11 @@ const videoProcessingMethods = {
       // console.log("imageKitIds: ", imageKitIds)
       // console.log("imageKitUrls: ", imageKitUrls)
 
-      console.log("2 -- req.body", req.body);
-      console.log("2 -- req.files", req.files);
+      // console.log("2 -- req.body", req.body);
+      // console.log("2 -- req.files", req.files);
 
       // req.files = imageKitUrls;
-      console.log(" 3 -- Imagekit urls and ids attached to req");
+      console.log(" VideoBooth 3 -- Imagekit urls and ids attached to req");
 
       return next();
     } else {
